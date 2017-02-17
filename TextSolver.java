@@ -308,7 +308,7 @@ public class TextSolver {
 					//If only one possibility variable is true, solve cell using that value
 					if (field[i][j].isMaybe1() ^ field[i][j].isMaybe2() ^ field[i][j].isMaybe3() ^
 							field[i][j].isMaybe4() ^ field[i][j].isMaybe5() ^ field[i][j].isMaybe6() ^
-							field[i][j].isMaybe7() ^ field[i][j].isMaybe8() ^ field[i][j].isMaybe9()) {
+							field[i][j].isMaybe7() ^ field[i][j].isMaybe8() ^ field[i][j].isMaybe9()) { 
 						if (field[i][j].isMaybe1()) {
 							field[i][j].setValue(1);
 							field[i][j].setSolved(true);
@@ -348,10 +348,33 @@ public class TextSolver {
 					}
 				}
 			}
+			
+			//TODO Finish section
+//			//Check for cells that are the only possibility for a number in a zone
+//			for (int i=0; i<9; i++) {
+//				if (zone0[i].isMaybe1())
+//			}
 
 			//Check to see if the entire puzzle is solved
+			//If yes, break while loop; if no, reset possibilities for all unsolved cells
 			if (checkPuzzle()) {
 				puzzleSolved = true;
+			} else {
+				for (int i=0; i<9; i++) {
+					for (int j=0; j<9; j++) {
+						if (!field[i][j].isSolved()) {
+							field[i][j].setMaybe1(false);
+							field[i][j].setMaybe2(false);
+							field[i][j].setMaybe3(false);
+							field[i][j].setMaybe4(false);
+							field[i][j].setMaybe5(false);
+							field[i][j].setMaybe6(false);
+							field[i][j].setMaybe7(false);
+							field[i][j].setMaybe8(false);
+							field[i][j].setMaybe9(false);
+						}
+					}
+				}
 			}
 		}
 
