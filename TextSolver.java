@@ -152,7 +152,17 @@ public class TextSolver {
 			}
 			
 			//TODO Finish section
-			//Check for cells that are the only possibility for a number in a row
+			//Check for cells that are the only possibility for a number in a zone
+			for (int i=0; i<9; i++) {
+				if (zone[i][0].isMaybe1() ^ zone[i][1].isMaybe1() ^ zone[i][2].isMaybe1() ^
+						zone[i][3].isMaybe1() ^ zone[i][4].isMaybe1() ^ zone[i][5].isMaybe1() ^
+						zone[i][6].isMaybe1() ^ zone[i][7].isMaybe1() ^ zone[i][8].isMaybe1()) {
+					if (zone[i][0].isMaybe1()) {
+						zone[i][0].setValue(1);
+						zone[i][0].setSolved(true);
+					}
+				}
+			}
 
 			//Check to see if the entire puzzle is solved
 			//If yes, break while loop; if no, reset possibilities for all unsolved cells
