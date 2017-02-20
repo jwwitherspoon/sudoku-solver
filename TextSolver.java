@@ -8,6 +8,34 @@ public class TextSolver {
 	//First dimension is row, second dimension is column
 	private static Cell[][] field = new Cell[9][9];
 	
+//	private static Cell[][] zone = {{field[0][0], field[0][1], field[0][2],
+//										field[1][0], field[1][1], field[1][2],
+//										field[2][0], field[2][1], field[2][2]},
+//									{field[0][3], field[0][4], field[0][5],
+//										field[1][3], field[1][4], field[1][5],
+//										field[2][3], field[2][4], field[2][5]},
+//									{field[0][6], field[0][7], field[0][8],
+//										field[1][6], field[1][7], field[1][8],
+//										field[2][6], field[2][7], field[2][8]},
+//									{field[3][0], field[3][1], field[3][2],
+//										field[4][0], field[4][1], field[4][2],
+//										field[5][0], field[5][1], field[5][2]},
+//									{field[3][3], field[3][4], field[3][5],
+//										field[4][3], field[4][4], field[4][5],
+//										field[5][3], field[5][4], field[5][5]},
+//									{field[3][6], field[3][7], field[3][8],
+//										field[4][6], field[4][7], field[4][8],
+//										field[5][6], field[5][7], field[5][8]},
+//									{field[6][0], field[6][1], field[6][2],
+//										field[7][0], field[7][1], field[7][2],
+//										field[8][0], field[8][1], field[8][2]},
+//									{field[6][3], field[6][4], field[6][5],
+//										field[7][3], field[7][4], field[7][5],
+//										field[8][3], field[8][4], field[8][5]},
+//									{field[6][6], field[6][7], field[6][8],
+//										field[7][6], field[7][7], field[7][8],
+//										field[8][6], field[8][7], field[8][8]}};
+	
 	public static void main(String[] args) {
 		//Populate field with cells; make row and column values in cells correspond to row and column number
 		for (int i=0; i<9; i++) {
@@ -15,6 +43,36 @@ public class TextSolver {
 				field[i][j] = new Cell(i,j);
 			}
 		}
+		
+//		Cell[][] zone = {{field[0][0], field[0][1], field[0][2],
+//							field[1][0], field[1][1], field[1][2],
+//							field[2][0], field[2][1], field[2][2]},
+//						{field[0][3], field[0][4], field[0][5],
+//							field[1][3], field[1][4], field[1][5],
+//							field[2][3], field[2][4], field[2][5]},
+//						{field[0][6], field[0][7], field[0][8],
+//							field[1][6], field[1][7], field[1][8],
+//							field[2][6], field[2][7], field[2][8]},
+//						{field[3][0], field[3][1], field[3][2],
+//							field[4][0], field[4][1], field[4][2],
+//							field[5][0], field[5][1], field[5][2]},
+//						{field[3][3], field[3][4], field[3][5],
+//							field[4][3], field[4][4], field[4][5],
+//							field[5][3], field[5][4], field[5][5]},
+//						{field[3][6], field[3][7], field[3][8],
+//							field[4][6], field[4][7], field[4][8],
+//							field[5][6], field[5][7], field[5][8]},
+//						{field[6][0], field[6][1], field[6][2],
+//							field[7][0], field[7][1], field[7][2],
+//							field[8][0], field[8][1], field[8][2]},
+//						{field[6][3], field[6][4], field[6][5],
+//							field[7][3], field[7][4], field[7][5],
+//							field[8][3], field[8][4], field[8][5]},
+//						{field[6][6], field[6][7], field[6][8],
+//							field[7][6], field[7][7], field[7][8],
+//							field[8][6], field[8][7], field[8][8]}};
+						
+						
 		
 		//Create and populate zones
 		//Zone layout:
@@ -350,10 +408,7 @@ public class TextSolver {
 			}
 			
 			//TODO Finish section
-//			//Check for cells that are the only possibility for a number in a zone
-//			for (int i=0; i<9; i++) {
-//				if (zone0[i].isMaybe1())
-//			}
+			//Check for cells that are the only possibility for a number in a row
 
 			//Check to see if the entire puzzle is solved
 			//If yes, break while loop; if no, reset possibilities for all unsolved cells
