@@ -8,110 +8,52 @@ public class TextSolver {
 	//First dimension is row, second dimension is column
 	private static Cell[][] field = new Cell[9][9];
 	
-//	private static Cell[][] zone = {{field[0][0], field[0][1], field[0][2],
-//										field[1][0], field[1][1], field[1][2],
-//										field[2][0], field[2][1], field[2][2]},
-//									{field[0][3], field[0][4], field[0][5],
-//										field[1][3], field[1][4], field[1][5],
-//										field[2][3], field[2][4], field[2][5]},
-//									{field[0][6], field[0][7], field[0][8],
-//										field[1][6], field[1][7], field[1][8],
-//										field[2][6], field[2][7], field[2][8]},
-//									{field[3][0], field[3][1], field[3][2],
-//										field[4][0], field[4][1], field[4][2],
-//										field[5][0], field[5][1], field[5][2]},
-//									{field[3][3], field[3][4], field[3][5],
-//										field[4][3], field[4][4], field[4][5],
-//										field[5][3], field[5][4], field[5][5]},
-//									{field[3][6], field[3][7], field[3][8],
-//										field[4][6], field[4][7], field[4][8],
-//										field[5][6], field[5][7], field[5][8]},
-//									{field[6][0], field[6][1], field[6][2],
-//										field[7][0], field[7][1], field[7][2],
-//										field[8][0], field[8][1], field[8][2]},
-//									{field[6][3], field[6][4], field[6][5],
-//										field[7][3], field[7][4], field[7][5],
-//										field[8][3], field[8][4], field[8][5]},
-//									{field[6][6], field[6][7], field[6][8],
-//										field[7][6], field[7][7], field[7][8],
-//										field[8][6], field[8][7], field[8][8]}};
-	
 	public static void main(String[] args) {
 		//Populate field with cells; make row and column values in cells correspond to row and column number
 		for (int i=0; i<9; i++) {
 			for (int j=0; j<9; j++) {
 				field[i][j] = new Cell(i,j);
 			}
-		}
+		}				
 		
-//		Cell[][] zone = {{field[0][0], field[0][1], field[0][2],
-//							field[1][0], field[1][1], field[1][2],
-//							field[2][0], field[2][1], field[2][2]},
-//						{field[0][3], field[0][4], field[0][5],
-//							field[1][3], field[1][4], field[1][5],
-//							field[2][3], field[2][4], field[2][5]},
-//						{field[0][6], field[0][7], field[0][8],
-//							field[1][6], field[1][7], field[1][8],
-//							field[2][6], field[2][7], field[2][8]},
-//						{field[3][0], field[3][1], field[3][2],
-//							field[4][0], field[4][1], field[4][2],
-//							field[5][0], field[5][1], field[5][2]},
-//						{field[3][3], field[3][4], field[3][5],
-//							field[4][3], field[4][4], field[4][5],
-//							field[5][3], field[5][4], field[5][5]},
-//						{field[3][6], field[3][7], field[3][8],
-//							field[4][6], field[4][7], field[4][8],
-//							field[5][6], field[5][7], field[5][8]},
-//						{field[6][0], field[6][1], field[6][2],
-//							field[7][0], field[7][1], field[7][2],
-//							field[8][0], field[8][1], field[8][2]},
-//						{field[6][3], field[6][4], field[6][5],
-//							field[7][3], field[7][4], field[7][5],
-//							field[8][3], field[8][4], field[8][5]},
-//						{field[6][6], field[6][7], field[6][8],
-//							field[7][6], field[7][7], field[7][8],
-//							field[8][6], field[8][7], field[8][8]}};
-						
-						
-		
-		//Create and populate zones
+		//Create and populate zones by connecting each cell from field to its corresponding zone cell
 		//Zone layout:
 		//	0	1	2
 		//	3	4	5
 		//	6	7	8
-		Cell[] zone0 = {field[0][0], field[0][1], field[0][2],
-						field[1][0], field[1][1], field[1][2],
-						field[2][0], field[2][1], field[2][2]};
-		Cell[] zone1 = {field[0][3], field[0][4], field[0][5],
-						field[1][3], field[1][4], field[1][5],
-						field[2][3], field[2][4], field[2][5]};
-		Cell[] zone2 = {field[0][6], field[0][7], field[0][8],
-						field[1][6], field[1][7], field[1][8],
-						field[2][6], field[2][7], field[2][8]};
-		Cell[] zone3 = {field[3][0], field[3][1], field[3][2],
-						field[4][0], field[4][1], field[4][2],
-						field[5][0], field[5][1], field[5][2]};
-		Cell[] zone4 = {field[3][3], field[3][4], field[3][5],
-						field[4][3], field[4][4], field[4][5],
-						field[5][3], field[5][4], field[5][5]};
-		Cell[] zone5 = {field[3][6], field[3][7], field[3][8],
-						field[4][6], field[4][7], field[4][8],
-						field[5][6], field[5][7], field[5][8]};
-		Cell[] zone6 = {field[6][0], field[6][1], field[6][2],
-						field[7][0], field[7][1], field[7][2],
-						field[8][0], field[8][1], field[8][2]};
-		Cell[] zone7 = {field[6][3], field[6][4], field[6][5],
-						field[7][3], field[7][4], field[7][5],
-						field[8][3], field[8][4], field[8][5]};
-		Cell[] zone8 = {field[6][6], field[6][7], field[6][8],
-						field[7][6], field[7][7], field[7][8],
-						field[8][6], field[8][7], field[8][8]};
+		Cell[][] zone = {{field[0][0], field[0][1], field[0][2],
+							field[1][0], field[1][1], field[1][2],
+							field[2][0], field[2][1], field[2][2]},
+						{field[0][3], field[0][4], field[0][5],
+							field[1][3], field[1][4], field[1][5],
+							field[2][3], field[2][4], field[2][5]},
+						{field[0][6], field[0][7], field[0][8],
+							field[1][6], field[1][7], field[1][8],
+							field[2][6], field[2][7], field[2][8]},
+						{field[3][0], field[3][1], field[3][2],
+							field[4][0], field[4][1], field[4][2],
+							field[5][0], field[5][1], field[5][2]},
+						{field[3][3], field[3][4], field[3][5],
+							field[4][3], field[4][4], field[4][5],
+							field[5][3], field[5][4], field[5][5]},
+						{field[3][6], field[3][7], field[3][8],
+							field[4][6], field[4][7], field[4][8],
+							field[5][6], field[5][7], field[5][8]},
+						{field[6][0], field[6][1], field[6][2],
+							field[7][0], field[7][1], field[7][2],
+							field[8][0], field[8][1], field[8][2]},
+						{field[6][3], field[6][4], field[6][5],
+							field[7][3], field[7][4], field[7][5],
+							field[8][3], field[8][4], field[8][5]},
+						{field[6][6], field[6][7], field[6][8],
+							field[7][6], field[7][7], field[7][8],
+							field[8][6], field[8][7], field[8][8]}};
 		
 		//Assign zone numbers to cells
 		for (int i=0; i<9; i++) {
-			zone0[i].setZone(0);	zone1[i].setZone(1);	zone2[i].setZone(2);
-			zone3[i].setZone(3);	zone4[i].setZone(4);	zone5[i].setZone(5);
-			zone6[i].setZone(6);	zone7[i].setZone(7);	zone8[i].setZone(8);
+			zone[0][i].setZone(0);	zone[1][i].setZone(1);	zone[2][i].setZone(2);
+			zone[3][i].setZone(3);	zone[4][i].setZone(4);	zone[5][i].setZone(5);
+			zone[6][i].setZone(6);	zone[7][i].setZone(7);	zone[8][i].setZone(8);
 		}
 		
 		//Input Sudoku grid and fill the cells with their respective values
@@ -138,22 +80,22 @@ public class TextSolver {
 			//For each cell in zone0
 			for (int i=0; i<9; i++) {
 				//If the cell is not solved
-				if (!zone0[i].isSolved()) {
+				if (!zone[0][i].isSolved()) {
 					//Test the cell for each possible value 1-9
 					for (int j=1; j<=9; j++) {
 						//As long as the value is not already in a solved cell in the zone
-						if (((zone0[0].isSolved() && zone0[0].getValue()!=j) || !(zone0[0].isSolved())) &&
-								((zone0[1].isSolved() && zone0[1].getValue()!=j) || !(zone0[1].isSolved())) &&
-								((zone0[2].isSolved() && zone0[2].getValue()!=j) || !(zone0[2].isSolved())) &&
-								((zone0[3].isSolved() && zone0[3].getValue()!=j) || !(zone0[3].isSolved())) &&
-								((zone0[4].isSolved() && zone0[4].getValue()!=j) || !(zone0[4].isSolved())) &&
-								((zone0[5].isSolved() && zone0[5].getValue()!=j) || !(zone0[5].isSolved())) &&
-								((zone0[6].isSolved() && zone0[6].getValue()!=j) || !(zone0[6].isSolved())) &&
-								((zone0[7].isSolved() && zone0[7].getValue()!=j) || !(zone0[7].isSolved())) &&
-								((zone0[8].isSolved() && zone0[8].getValue()!=j) || !(zone0[8].isSolved()))) {
-							zone0[i].setValue(j);
-							if (checkCell(zone0[i])) {
-								zone0[i].addPossible();
+						if (((zone[0][0].isSolved() && zone[0][0].getValue()!=j) || !(zone[0][0].isSolved())) &&
+								((zone[0][1].isSolved() && zone[0][1].getValue()!=j) || !(zone[0][1].isSolved())) &&
+								((zone[0][2].isSolved() && zone[0][2].getValue()!=j) || !(zone[0][2].isSolved())) &&
+								((zone[0][3].isSolved() && zone[0][3].getValue()!=j) || !(zone[0][3].isSolved())) &&
+								((zone[0][4].isSolved() && zone[0][4].getValue()!=j) || !(zone[0][4].isSolved())) &&
+								((zone[0][5].isSolved() && zone[0][5].getValue()!=j) || !(zone[0][5].isSolved())) &&
+								((zone[0][6].isSolved() && zone[0][6].getValue()!=j) || !(zone[0][6].isSolved())) &&
+								((zone[0][7].isSolved() && zone[0][7].getValue()!=j) || !(zone[0][7].isSolved())) &&
+								((zone[0][8].isSolved() && zone[0][8].getValue()!=j) || !(zone[0][8].isSolved()))) {
+							zone[0][i].setValue(j);
+							if (checkCell(zone[0][i])) {
+								zone[0][i].addPossible();
 							}
 						}
 					}
@@ -163,22 +105,22 @@ public class TextSolver {
 			//For each cell in zone1
 			for (int i=0; i<9; i++) {
 				//If the cell is not solved
-				if (!zone1[i].isSolved()) {
+				if (!zone[1][i].isSolved()) {
 					//Test the cell for each possible value 1-9
 					for (int j=1; j<=9; j++) {
 						//As long as the value is not already in a solved cell in the zone
-						if (((zone1[0].isSolved() && zone1[0].getValue()!=j) || !(zone1[0].isSolved())) &&
-								((zone1[1].isSolved() && zone1[1].getValue()!=j) || !(zone1[1].isSolved())) &&
-								((zone1[2].isSolved() && zone1[2].getValue()!=j) || !(zone1[2].isSolved())) &&
-								((zone1[3].isSolved() && zone1[3].getValue()!=j) || !(zone1[3].isSolved())) &&
-								((zone1[4].isSolved() && zone1[4].getValue()!=j) || !(zone1[4].isSolved())) &&
-								((zone1[5].isSolved() && zone1[5].getValue()!=j) || !(zone1[5].isSolved())) &&
-								((zone1[6].isSolved() && zone1[6].getValue()!=j) || !(zone1[6].isSolved())) &&
-								((zone1[7].isSolved() && zone1[7].getValue()!=j) || !(zone1[7].isSolved())) &&
-								((zone1[8].isSolved() && zone1[8].getValue()!=j) || !(zone1[8].isSolved()))) {
-							zone1[i].setValue(j);
-							if (checkCell(zone1[i])) {
-								zone1[i].addPossible();
+						if (((zone[1][0].isSolved() && zone[1][0].getValue()!=j) || !(zone[1][0].isSolved())) &&
+								((zone[1][1].isSolved() && zone[1][1].getValue()!=j) || !(zone[1][1].isSolved())) &&
+								((zone[1][2].isSolved() && zone[1][2].getValue()!=j) || !(zone[1][2].isSolved())) &&
+								((zone[1][3].isSolved() && zone[1][3].getValue()!=j) || !(zone[1][3].isSolved())) &&
+								((zone[1][4].isSolved() && zone[1][4].getValue()!=j) || !(zone[1][4].isSolved())) &&
+								((zone[1][5].isSolved() && zone[1][5].getValue()!=j) || !(zone[1][5].isSolved())) &&
+								((zone[1][6].isSolved() && zone[1][6].getValue()!=j) || !(zone[1][6].isSolved())) &&
+								((zone[1][7].isSolved() && zone[1][7].getValue()!=j) || !(zone[1][7].isSolved())) &&
+								((zone[1][8].isSolved() && zone[1][8].getValue()!=j) || !(zone[1][8].isSolved()))) {
+							zone[1][i].setValue(j);
+							if (checkCell(zone[1][i])) {
+								zone[1][i].addPossible();
 							}
 						}
 					}
@@ -188,22 +130,22 @@ public class TextSolver {
 			//For each cell in zone2
 			for (int i=0; i<9; i++) {
 				//If the cell is not solved
-				if (!zone2[i].isSolved()) {
+				if (!zone[2][i].isSolved()) {
 					//Test the cell for each possible value 1-9
 					for (int j=1; j<=9; j++) {
 						//As long as the value is not already in a solved cell in the zone
-						if (((zone2[0].isSolved() && zone2[0].getValue()!=j) || !(zone2[0].isSolved())) &&
-								((zone2[1].isSolved() && zone2[1].getValue()!=j) || !(zone2[1].isSolved())) &&
-								((zone2[2].isSolved() && zone2[2].getValue()!=j) || !(zone2[2].isSolved())) &&
-								((zone2[3].isSolved() && zone2[3].getValue()!=j) || !(zone2[3].isSolved())) &&
-								((zone2[4].isSolved() && zone2[4].getValue()!=j) || !(zone2[4].isSolved())) &&
-								((zone2[5].isSolved() && zone2[5].getValue()!=j) || !(zone2[5].isSolved())) &&
-								((zone2[6].isSolved() && zone2[6].getValue()!=j) || !(zone2[6].isSolved())) &&
-								((zone2[7].isSolved() && zone2[7].getValue()!=j) || !(zone2[7].isSolved())) &&
-								((zone2[8].isSolved() && zone2[8].getValue()!=j) || !(zone2[8].isSolved()))) {
-							zone2[i].setValue(j);
-							if (checkCell(zone2[i])) {
-								zone2[i].addPossible();
+						if (((zone[2][0].isSolved() && zone[2][0].getValue()!=j) || !(zone[2][0].isSolved())) &&
+								((zone[2][1].isSolved() && zone[2][1].getValue()!=j) || !(zone[2][1].isSolved())) &&
+								((zone[2][2].isSolved() && zone[2][2].getValue()!=j) || !(zone[2][2].isSolved())) &&
+								((zone[2][3].isSolved() && zone[2][3].getValue()!=j) || !(zone[2][3].isSolved())) &&
+								((zone[2][4].isSolved() && zone[2][4].getValue()!=j) || !(zone[2][4].isSolved())) &&
+								((zone[2][5].isSolved() && zone[2][5].getValue()!=j) || !(zone[2][5].isSolved())) &&
+								((zone[2][6].isSolved() && zone[2][6].getValue()!=j) || !(zone[2][6].isSolved())) &&
+								((zone[2][7].isSolved() && zone[2][7].getValue()!=j) || !(zone[2][7].isSolved())) &&
+								((zone[2][8].isSolved() && zone[2][8].getValue()!=j) || !(zone[2][8].isSolved()))) {
+							zone[2][i].setValue(j);
+							if (checkCell(zone[2][i])) {
+								zone[2][i].addPossible();
 							}
 						}
 					}
@@ -213,22 +155,22 @@ public class TextSolver {
 			//For each cell in zone3
 			for (int i=0; i<9; i++) {
 				//If the cell is not solved
-				if (!zone3[i].isSolved()) {
+				if (!zone[3][i].isSolved()) {
 					//Test the cell for each possible value 1-9
 					for (int j=1; j<=9; j++) {
 						//As long as the value is not already in a solved cell in the zone
-						if (((zone3[0].isSolved() && zone3[0].getValue()!=j) || !(zone3[0].isSolved())) &&
-								((zone3[1].isSolved() && zone3[1].getValue()!=j) || !(zone3[1].isSolved())) &&
-								((zone3[2].isSolved() && zone3[2].getValue()!=j) || !(zone3[2].isSolved())) &&
-								((zone3[3].isSolved() && zone3[3].getValue()!=j) || !(zone3[3].isSolved())) &&
-								((zone3[4].isSolved() && zone3[4].getValue()!=j) || !(zone3[4].isSolved())) &&
-								((zone3[5].isSolved() && zone3[5].getValue()!=j) || !(zone3[5].isSolved())) &&
-								((zone3[6].isSolved() && zone3[6].getValue()!=j) || !(zone3[6].isSolved())) &&
-								((zone3[7].isSolved() && zone3[7].getValue()!=j) || !(zone3[7].isSolved())) &&
-								((zone3[8].isSolved() && zone3[8].getValue()!=j) || !(zone3[8].isSolved()))) {
-							zone3[i].setValue(j);
-							if (checkCell(zone3[i])) {
-								zone3[i].addPossible();
+						if (((zone[3][0].isSolved() && zone[3][0].getValue()!=j) || !(zone[3][0].isSolved())) &&
+								((zone[3][1].isSolved() && zone[3][1].getValue()!=j) || !(zone[3][1].isSolved())) &&
+								((zone[3][2].isSolved() && zone[3][2].getValue()!=j) || !(zone[3][2].isSolved())) &&
+								((zone[3][3].isSolved() && zone[3][3].getValue()!=j) || !(zone[3][3].isSolved())) &&
+								((zone[3][4].isSolved() && zone[3][4].getValue()!=j) || !(zone[3][4].isSolved())) &&
+								((zone[3][5].isSolved() && zone[3][5].getValue()!=j) || !(zone[3][5].isSolved())) &&
+								((zone[3][6].isSolved() && zone[3][6].getValue()!=j) || !(zone[3][6].isSolved())) &&
+								((zone[3][7].isSolved() && zone[3][7].getValue()!=j) || !(zone[3][7].isSolved())) &&
+								((zone[3][8].isSolved() && zone[3][8].getValue()!=j) || !(zone[3][8].isSolved()))) {
+							zone[3][i].setValue(j);
+							if (checkCell(zone[3][i])) {
+								zone[3][i].addPossible();
 							}
 						}
 					}
@@ -238,22 +180,22 @@ public class TextSolver {
 			//For each cell in zone4
 			for (int i=0; i<9; i++) {
 				//If the cell is not solved
-				if (!zone4[i].isSolved()) {
+				if (!zone[4][i].isSolved()) {
 					//Test the cell for each possible value 1-9
 					for (int j=1; j<=9; j++) {
 						//As long as the value is not already in a solved cell in the zone
-						if (((zone4[0].isSolved() && zone4[0].getValue()!=j) || !(zone4[0].isSolved())) &&
-								((zone4[1].isSolved() && zone4[1].getValue()!=j) || !(zone4[1].isSolved())) &&
-								((zone4[2].isSolved() && zone4[2].getValue()!=j) || !(zone4[2].isSolved())) &&
-								((zone4[3].isSolved() && zone4[3].getValue()!=j) || !(zone4[3].isSolved())) &&
-								((zone4[4].isSolved() && zone4[4].getValue()!=j) || !(zone4[4].isSolved())) &&
-								((zone4[5].isSolved() && zone4[5].getValue()!=j) || !(zone4[5].isSolved())) &&
-								((zone4[6].isSolved() && zone4[6].getValue()!=j) || !(zone4[6].isSolved())) &&
-								((zone4[7].isSolved() && zone4[7].getValue()!=j) || !(zone4[7].isSolved())) &&
-								((zone4[8].isSolved() && zone4[8].getValue()!=j) || !(zone4[8].isSolved()))) {
-							zone4[i].setValue(j);
-							if (checkCell(zone4[i])) {
-								zone4[i].addPossible();
+						if (((zone[4][0].isSolved() && zone[4][0].getValue()!=j) || !(zone[4][0].isSolved())) &&
+								((zone[4][1].isSolved() && zone[4][1].getValue()!=j) || !(zone[4][1].isSolved())) &&
+								((zone[4][2].isSolved() && zone[4][2].getValue()!=j) || !(zone[4][2].isSolved())) &&
+								((zone[4][3].isSolved() && zone[4][3].getValue()!=j) || !(zone[4][3].isSolved())) &&
+								((zone[4][4].isSolved() && zone[4][4].getValue()!=j) || !(zone[4][4].isSolved())) &&
+								((zone[4][5].isSolved() && zone[4][5].getValue()!=j) || !(zone[4][5].isSolved())) &&
+								((zone[4][6].isSolved() && zone[4][6].getValue()!=j) || !(zone[4][6].isSolved())) &&
+								((zone[4][7].isSolved() && zone[4][7].getValue()!=j) || !(zone[4][7].isSolved())) &&
+								((zone[4][8].isSolved() && zone[4][8].getValue()!=j) || !(zone[4][8].isSolved()))) {
+							zone[4][i].setValue(j);
+							if (checkCell(zone[4][i])) {
+								zone[4][i].addPossible();
 							}
 						}
 					}
@@ -263,22 +205,22 @@ public class TextSolver {
 			//For each cell in zone5
 			for (int i=0; i<9; i++) {
 				//If the cell is not solved
-				if (!zone5[i].isSolved()) {
+				if (!zone[5][i].isSolved()) {
 					//Test the cell for each possible value 1-9
 					for (int j=1; j<=9; j++) {
 						//As long as the value is not already in a solved cell in the zone
-						if (((zone5[0].isSolved() && zone5[0].getValue()!=j) || !(zone5[0].isSolved())) &&
-								((zone5[1].isSolved() && zone5[1].getValue()!=j) || !(zone5[1].isSolved())) &&
-								((zone5[2].isSolved() && zone5[2].getValue()!=j) || !(zone5[2].isSolved())) &&
-								((zone5[3].isSolved() && zone5[3].getValue()!=j) || !(zone5[3].isSolved())) &&
-								((zone5[4].isSolved() && zone5[4].getValue()!=j) || !(zone5[4].isSolved())) &&
-								((zone5[5].isSolved() && zone5[5].getValue()!=j) || !(zone5[5].isSolved())) &&
-								((zone5[6].isSolved() && zone5[6].getValue()!=j) || !(zone5[6].isSolved())) &&
-								((zone5[7].isSolved() && zone5[7].getValue()!=j) || !(zone5[7].isSolved())) &&
-								((zone5[8].isSolved() && zone5[8].getValue()!=j) || !(zone5[8].isSolved()))) {
-							zone5[i].setValue(j);
-							if (checkCell(zone5[i])) {
-								zone5[i].addPossible();
+						if (((zone[5][0].isSolved() && zone[5][0].getValue()!=j) || !(zone[5][0].isSolved())) &&
+								((zone[5][1].isSolved() && zone[5][1].getValue()!=j) || !(zone[5][1].isSolved())) &&
+								((zone[5][2].isSolved() && zone[5][2].getValue()!=j) || !(zone[5][2].isSolved())) &&
+								((zone[5][3].isSolved() && zone[5][3].getValue()!=j) || !(zone[5][3].isSolved())) &&
+								((zone[5][4].isSolved() && zone[5][4].getValue()!=j) || !(zone[5][4].isSolved())) &&
+								((zone[5][5].isSolved() && zone[5][5].getValue()!=j) || !(zone[5][5].isSolved())) &&
+								((zone[5][6].isSolved() && zone[5][6].getValue()!=j) || !(zone[5][6].isSolved())) &&
+								((zone[5][7].isSolved() && zone[5][7].getValue()!=j) || !(zone[5][7].isSolved())) &&
+								((zone[5][8].isSolved() && zone[5][8].getValue()!=j) || !(zone[5][8].isSolved()))) {
+							zone[5][i].setValue(j);
+							if (checkCell(zone[5][i])) {
+								zone[5][i].addPossible();
 							}
 						}
 					}
@@ -288,22 +230,22 @@ public class TextSolver {
 			//For each cell in zone6
 			for (int i=0; i<9; i++) {
 				//If the cell is not solved
-				if (!zone6[i].isSolved()) {
+				if (!zone[6][i].isSolved()) {
 					//Test the cell for each possible value 1-9
 					for (int j=1; j<=9; j++) {
 						//As long as the value is not already in a solved cell in the zone
-						if (((zone6[0].isSolved() && zone6[0].getValue()!=j) || !(zone6[0].isSolved())) &&
-								((zone6[1].isSolved() && zone6[1].getValue()!=j) || !(zone6[1].isSolved())) &&
-								((zone6[2].isSolved() && zone6[2].getValue()!=j) || !(zone6[2].isSolved())) &&
-								((zone6[3].isSolved() && zone6[3].getValue()!=j) || !(zone6[3].isSolved())) &&
-								((zone6[4].isSolved() && zone6[4].getValue()!=j) || !(zone6[4].isSolved())) &&
-								((zone6[5].isSolved() && zone6[5].getValue()!=j) || !(zone6[5].isSolved())) &&
-								((zone6[6].isSolved() && zone6[6].getValue()!=j) || !(zone6[6].isSolved())) &&
-								((zone6[7].isSolved() && zone6[7].getValue()!=j) || !(zone6[7].isSolved())) &&
-								((zone6[8].isSolved() && zone6[8].getValue()!=j) || !(zone6[8].isSolved()))) {
-							zone6[i].setValue(j);
-							if (checkCell(zone6[i])) {
-								zone6[i].addPossible();
+						if (((zone[6][0].isSolved() && zone[6][0].getValue()!=j) || !(zone[6][0].isSolved())) &&
+								((zone[6][1].isSolved() && zone[6][1].getValue()!=j) || !(zone[6][1].isSolved())) &&
+								((zone[6][2].isSolved() && zone[6][2].getValue()!=j) || !(zone[6][2].isSolved())) &&
+								((zone[6][3].isSolved() && zone[6][3].getValue()!=j) || !(zone[6][3].isSolved())) &&
+								((zone[6][4].isSolved() && zone[6][4].getValue()!=j) || !(zone[6][4].isSolved())) &&
+								((zone[6][5].isSolved() && zone[6][5].getValue()!=j) || !(zone[6][5].isSolved())) &&
+								((zone[6][6].isSolved() && zone[6][6].getValue()!=j) || !(zone[6][6].isSolved())) &&
+								((zone[6][7].isSolved() && zone[6][7].getValue()!=j) || !(zone[6][7].isSolved())) &&
+								((zone[6][8].isSolved() && zone[6][8].getValue()!=j) || !(zone[6][8].isSolved()))) {
+							zone[6][i].setValue(j);
+							if (checkCell(zone[6][i])) {
+								zone[6][i].addPossible();
 							}
 						}
 					}
@@ -313,22 +255,22 @@ public class TextSolver {
 			//For each cell in zone7
 			for (int i=0; i<9; i++) {
 				//If the cell is not solved
-				if (!zone7[i].isSolved()) {
+				if (!zone[7][i].isSolved()) {
 					//Test the cell for each possible value 1-9
 					for (int j=1; j<=9; j++) {
 						//As long as the value is not already in a solved cell in the zone
-						if (((zone7[0].isSolved() && zone7[0].getValue()!=j) || !(zone7[0].isSolved())) &&
-								((zone7[1].isSolved() && zone7[1].getValue()!=j) || !(zone7[1].isSolved())) &&
-								((zone7[2].isSolved() && zone7[2].getValue()!=j) || !(zone7[2].isSolved())) &&
-								((zone7[3].isSolved() && zone7[3].getValue()!=j) || !(zone7[3].isSolved())) &&
-								((zone7[4].isSolved() && zone7[4].getValue()!=j) || !(zone7[4].isSolved())) &&
-								((zone7[5].isSolved() && zone7[5].getValue()!=j) || !(zone7[5].isSolved())) &&
-								((zone7[6].isSolved() && zone7[6].getValue()!=j) || !(zone7[6].isSolved())) &&
-								((zone7[7].isSolved() && zone7[7].getValue()!=j) || !(zone7[7].isSolved())) &&
-								((zone7[8].isSolved() && zone7[8].getValue()!=j) || !(zone7[8].isSolved()))) {
-							zone7[i].setValue(j);
-							if (checkCell(zone7[i])) {
-								zone7[i].addPossible();
+						if (((zone[7][0].isSolved() && zone[7][0].getValue()!=j) || !(zone[7][0].isSolved())) &&
+								((zone[7][1].isSolved() && zone[7][1].getValue()!=j) || !(zone[7][1].isSolved())) &&
+								((zone[7][2].isSolved() && zone[7][2].getValue()!=j) || !(zone[7][2].isSolved())) &&
+								((zone[7][3].isSolved() && zone[7][3].getValue()!=j) || !(zone[7][3].isSolved())) &&
+								((zone[7][4].isSolved() && zone[7][4].getValue()!=j) || !(zone[7][4].isSolved())) &&
+								((zone[7][5].isSolved() && zone[7][5].getValue()!=j) || !(zone[7][5].isSolved())) &&
+								((zone[7][6].isSolved() && zone[7][6].getValue()!=j) || !(zone[7][6].isSolved())) &&
+								((zone[7][7].isSolved() && zone[7][7].getValue()!=j) || !(zone[7][7].isSolved())) &&
+								((zone[7][8].isSolved() && zone[7][8].getValue()!=j) || !(zone[7][8].isSolved()))) {
+							zone[7][i].setValue(j);
+							if (checkCell(zone[7][i])) {
+								zone[7][i].addPossible();
 							}
 						}
 					}
@@ -338,22 +280,22 @@ public class TextSolver {
 			//For each cell in zone8
 			for (int i=0; i<9; i++) {
 				//If the cell is not solved
-				if (!zone8[i].isSolved()) {
+				if (!zone[8][i].isSolved()) {
 					//Test the cell for each possible value 1-9
 					for (int j=1; j<=9; j++) {
 						//As long as the value is not already in a solved cell in the zone
-						if (((zone8[0].isSolved() && zone8[0].getValue()!=j) || !(zone8[0].isSolved())) &&
-								((zone8[1].isSolved() && zone8[1].getValue()!=j) || !(zone8[1].isSolved())) &&
-								((zone8[2].isSolved() && zone8[2].getValue()!=j) || !(zone8[2].isSolved())) &&
-								((zone8[3].isSolved() && zone8[3].getValue()!=j) || !(zone8[3].isSolved())) &&
-								((zone8[4].isSolved() && zone8[4].getValue()!=j) || !(zone8[4].isSolved())) &&
-								((zone8[5].isSolved() && zone8[5].getValue()!=j) || !(zone8[5].isSolved())) &&
-								((zone8[6].isSolved() && zone8[6].getValue()!=j) || !(zone8[6].isSolved())) &&
-								((zone8[7].isSolved() && zone8[7].getValue()!=j) || !(zone8[7].isSolved())) &&
-								((zone8[8].isSolved() && zone8[8].getValue()!=j) || !(zone8[8].isSolved()))) {
-							zone8[i].setValue(j);
-							if (checkCell(zone8[i])) {
-								zone8[i].addPossible();
+						if (((zone[8][0].isSolved() && zone[8][0].getValue()!=j) || !(zone[8][0].isSolved())) &&
+								((zone[8][1].isSolved() && zone[8][1].getValue()!=j) || !(zone[8][1].isSolved())) &&
+								((zone[8][2].isSolved() && zone[8][2].getValue()!=j) || !(zone[8][2].isSolved())) &&
+								((zone[8][3].isSolved() && zone[8][3].getValue()!=j) || !(zone[8][3].isSolved())) &&
+								((zone[8][4].isSolved() && zone[8][4].getValue()!=j) || !(zone[8][4].isSolved())) &&
+								((zone[8][5].isSolved() && zone[8][5].getValue()!=j) || !(zone[8][5].isSolved())) &&
+								((zone[8][6].isSolved() && zone[8][6].getValue()!=j) || !(zone[8][6].isSolved())) &&
+								((zone[8][7].isSolved() && zone[8][7].getValue()!=j) || !(zone[8][7].isSolved())) &&
+								((zone[8][8].isSolved() && zone[8][8].getValue()!=j) || !(zone[8][8].isSolved()))) {
+							zone[8][i].setValue(j);
+							if (checkCell(zone[8][i])) {
+								zone[8][i].addPossible();
 							}
 						}
 					}
@@ -481,3 +423,6 @@ public class TextSolver {
 	}
 	
 }
+
+//Test puzzle
+// 0 8 5 3 2 4 9 6 7 0 4 6 1 8 7 5 2 3 0 7 3 9 5 6 1 8 4 0 2 4 6 1 3 7 5 9 0 1 9 5 7 8 3 4 2 0 5 7 4 9 2 8 1 6 0 3 2 7 4 1 6 9 8 0 9 8 2 6 5 4 3 1 0 6 1 8 3 9 2 7 5
