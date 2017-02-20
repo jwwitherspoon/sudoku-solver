@@ -76,226 +76,28 @@ public class TextSolver {
 		boolean puzzleSolved = false;
 		while (!puzzleSolved) {
 			//Compute all possibilities for each cell
-			//Compute all possibilities for zone0
-			//For each cell in zone0
+			//For each zone
 			for (int i=0; i<9; i++) {
-				//If the cell is not solved
-				if (!zone[0][i].isSolved()) {
-					//Test the cell for each possible value 1-9
-					for (int j=1; j<=9; j++) {
-						//As long as the value is not already in a solved cell in the zone
-						if (((zone[0][0].isSolved() && zone[0][0].getValue()!=j) || !(zone[0][0].isSolved())) &&
-								((zone[0][1].isSolved() && zone[0][1].getValue()!=j) || !(zone[0][1].isSolved())) &&
-								((zone[0][2].isSolved() && zone[0][2].getValue()!=j) || !(zone[0][2].isSolved())) &&
-								((zone[0][3].isSolved() && zone[0][3].getValue()!=j) || !(zone[0][3].isSolved())) &&
-								((zone[0][4].isSolved() && zone[0][4].getValue()!=j) || !(zone[0][4].isSolved())) &&
-								((zone[0][5].isSolved() && zone[0][5].getValue()!=j) || !(zone[0][5].isSolved())) &&
-								((zone[0][6].isSolved() && zone[0][6].getValue()!=j) || !(zone[0][6].isSolved())) &&
-								((zone[0][7].isSolved() && zone[0][7].getValue()!=j) || !(zone[0][7].isSolved())) &&
-								((zone[0][8].isSolved() && zone[0][8].getValue()!=j) || !(zone[0][8].isSolved()))) {
-							zone[0][i].setValue(j);
-							if (checkCell(zone[0][i])) {
-								zone[0][i].addPossible();
-							}
-						}
-					}
-				}
-			}
-			//Compute all possibilities for zone1
-			//For each cell in zone1
-			for (int i=0; i<9; i++) {
-				//If the cell is not solved
-				if (!zone[1][i].isSolved()) {
-					//Test the cell for each possible value 1-9
-					for (int j=1; j<=9; j++) {
-						//As long as the value is not already in a solved cell in the zone
-						if (((zone[1][0].isSolved() && zone[1][0].getValue()!=j) || !(zone[1][0].isSolved())) &&
-								((zone[1][1].isSolved() && zone[1][1].getValue()!=j) || !(zone[1][1].isSolved())) &&
-								((zone[1][2].isSolved() && zone[1][2].getValue()!=j) || !(zone[1][2].isSolved())) &&
-								((zone[1][3].isSolved() && zone[1][3].getValue()!=j) || !(zone[1][3].isSolved())) &&
-								((zone[1][4].isSolved() && zone[1][4].getValue()!=j) || !(zone[1][4].isSolved())) &&
-								((zone[1][5].isSolved() && zone[1][5].getValue()!=j) || !(zone[1][5].isSolved())) &&
-								((zone[1][6].isSolved() && zone[1][6].getValue()!=j) || !(zone[1][6].isSolved())) &&
-								((zone[1][7].isSolved() && zone[1][7].getValue()!=j) || !(zone[1][7].isSolved())) &&
-								((zone[1][8].isSolved() && zone[1][8].getValue()!=j) || !(zone[1][8].isSolved()))) {
-							zone[1][i].setValue(j);
-							if (checkCell(zone[1][i])) {
-								zone[1][i].addPossible();
-							}
-						}
-					}
-				}
-			}
-			//Compute all possibilities for zone2
-			//For each cell in zone2
-			for (int i=0; i<9; i++) {
-				//If the cell is not solved
-				if (!zone[2][i].isSolved()) {
-					//Test the cell for each possible value 1-9
-					for (int j=1; j<=9; j++) {
-						//As long as the value is not already in a solved cell in the zone
-						if (((zone[2][0].isSolved() && zone[2][0].getValue()!=j) || !(zone[2][0].isSolved())) &&
-								((zone[2][1].isSolved() && zone[2][1].getValue()!=j) || !(zone[2][1].isSolved())) &&
-								((zone[2][2].isSolved() && zone[2][2].getValue()!=j) || !(zone[2][2].isSolved())) &&
-								((zone[2][3].isSolved() && zone[2][3].getValue()!=j) || !(zone[2][3].isSolved())) &&
-								((zone[2][4].isSolved() && zone[2][4].getValue()!=j) || !(zone[2][4].isSolved())) &&
-								((zone[2][5].isSolved() && zone[2][5].getValue()!=j) || !(zone[2][5].isSolved())) &&
-								((zone[2][6].isSolved() && zone[2][6].getValue()!=j) || !(zone[2][6].isSolved())) &&
-								((zone[2][7].isSolved() && zone[2][7].getValue()!=j) || !(zone[2][7].isSolved())) &&
-								((zone[2][8].isSolved() && zone[2][8].getValue()!=j) || !(zone[2][8].isSolved()))) {
-							zone[2][i].setValue(j);
-							if (checkCell(zone[2][i])) {
-								zone[2][i].addPossible();
-							}
-						}
-					}
-				}
-			}
-			//Compute all possibilities for zone3
-			//For each cell in zone3
-			for (int i=0; i<9; i++) {
-				//If the cell is not solved
-				if (!zone[3][i].isSolved()) {
-					//Test the cell for each possible value 1-9
-					for (int j=1; j<=9; j++) {
-						//As long as the value is not already in a solved cell in the zone
-						if (((zone[3][0].isSolved() && zone[3][0].getValue()!=j) || !(zone[3][0].isSolved())) &&
-								((zone[3][1].isSolved() && zone[3][1].getValue()!=j) || !(zone[3][1].isSolved())) &&
-								((zone[3][2].isSolved() && zone[3][2].getValue()!=j) || !(zone[3][2].isSolved())) &&
-								((zone[3][3].isSolved() && zone[3][3].getValue()!=j) || !(zone[3][3].isSolved())) &&
-								((zone[3][4].isSolved() && zone[3][4].getValue()!=j) || !(zone[3][4].isSolved())) &&
-								((zone[3][5].isSolved() && zone[3][5].getValue()!=j) || !(zone[3][5].isSolved())) &&
-								((zone[3][6].isSolved() && zone[3][6].getValue()!=j) || !(zone[3][6].isSolved())) &&
-								((zone[3][7].isSolved() && zone[3][7].getValue()!=j) || !(zone[3][7].isSolved())) &&
-								((zone[3][8].isSolved() && zone[3][8].getValue()!=j) || !(zone[3][8].isSolved()))) {
-							zone[3][i].setValue(j);
-							if (checkCell(zone[3][i])) {
-								zone[3][i].addPossible();
-							}
-						}
-					}
-				}
-			}
-			//Compute all possibilities for zone4
-			//For each cell in zone4
-			for (int i=0; i<9; i++) {
-				//If the cell is not solved
-				if (!zone[4][i].isSolved()) {
-					//Test the cell for each possible value 1-9
-					for (int j=1; j<=9; j++) {
-						//As long as the value is not already in a solved cell in the zone
-						if (((zone[4][0].isSolved() && zone[4][0].getValue()!=j) || !(zone[4][0].isSolved())) &&
-								((zone[4][1].isSolved() && zone[4][1].getValue()!=j) || !(zone[4][1].isSolved())) &&
-								((zone[4][2].isSolved() && zone[4][2].getValue()!=j) || !(zone[4][2].isSolved())) &&
-								((zone[4][3].isSolved() && zone[4][3].getValue()!=j) || !(zone[4][3].isSolved())) &&
-								((zone[4][4].isSolved() && zone[4][4].getValue()!=j) || !(zone[4][4].isSolved())) &&
-								((zone[4][5].isSolved() && zone[4][5].getValue()!=j) || !(zone[4][5].isSolved())) &&
-								((zone[4][6].isSolved() && zone[4][6].getValue()!=j) || !(zone[4][6].isSolved())) &&
-								((zone[4][7].isSolved() && zone[4][7].getValue()!=j) || !(zone[4][7].isSolved())) &&
-								((zone[4][8].isSolved() && zone[4][8].getValue()!=j) || !(zone[4][8].isSolved()))) {
-							zone[4][i].setValue(j);
-							if (checkCell(zone[4][i])) {
-								zone[4][i].addPossible();
-							}
-						}
-					}
-				}
-			}
-			//Compute all possibilities for zone5
-			//For each cell in zone5
-			for (int i=0; i<9; i++) {
-				//If the cell is not solved
-				if (!zone[5][i].isSolved()) {
-					//Test the cell for each possible value 1-9
-					for (int j=1; j<=9; j++) {
-						//As long as the value is not already in a solved cell in the zone
-						if (((zone[5][0].isSolved() && zone[5][0].getValue()!=j) || !(zone[5][0].isSolved())) &&
-								((zone[5][1].isSolved() && zone[5][1].getValue()!=j) || !(zone[5][1].isSolved())) &&
-								((zone[5][2].isSolved() && zone[5][2].getValue()!=j) || !(zone[5][2].isSolved())) &&
-								((zone[5][3].isSolved() && zone[5][3].getValue()!=j) || !(zone[5][3].isSolved())) &&
-								((zone[5][4].isSolved() && zone[5][4].getValue()!=j) || !(zone[5][4].isSolved())) &&
-								((zone[5][5].isSolved() && zone[5][5].getValue()!=j) || !(zone[5][5].isSolved())) &&
-								((zone[5][6].isSolved() && zone[5][6].getValue()!=j) || !(zone[5][6].isSolved())) &&
-								((zone[5][7].isSolved() && zone[5][7].getValue()!=j) || !(zone[5][7].isSolved())) &&
-								((zone[5][8].isSolved() && zone[5][8].getValue()!=j) || !(zone[5][8].isSolved()))) {
-							zone[5][i].setValue(j);
-							if (checkCell(zone[5][i])) {
-								zone[5][i].addPossible();
-							}
-						}
-					}
-				}
-			}
-			//Compute all possibilities for zone6
-			//For each cell in zone6
-			for (int i=0; i<9; i++) {
-				//If the cell is not solved
-				if (!zone[6][i].isSolved()) {
-					//Test the cell for each possible value 1-9
-					for (int j=1; j<=9; j++) {
-						//As long as the value is not already in a solved cell in the zone
-						if (((zone[6][0].isSolved() && zone[6][0].getValue()!=j) || !(zone[6][0].isSolved())) &&
-								((zone[6][1].isSolved() && zone[6][1].getValue()!=j) || !(zone[6][1].isSolved())) &&
-								((zone[6][2].isSolved() && zone[6][2].getValue()!=j) || !(zone[6][2].isSolved())) &&
-								((zone[6][3].isSolved() && zone[6][3].getValue()!=j) || !(zone[6][3].isSolved())) &&
-								((zone[6][4].isSolved() && zone[6][4].getValue()!=j) || !(zone[6][4].isSolved())) &&
-								((zone[6][5].isSolved() && zone[6][5].getValue()!=j) || !(zone[6][5].isSolved())) &&
-								((zone[6][6].isSolved() && zone[6][6].getValue()!=j) || !(zone[6][6].isSolved())) &&
-								((zone[6][7].isSolved() && zone[6][7].getValue()!=j) || !(zone[6][7].isSolved())) &&
-								((zone[6][8].isSolved() && zone[6][8].getValue()!=j) || !(zone[6][8].isSolved()))) {
-							zone[6][i].setValue(j);
-							if (checkCell(zone[6][i])) {
-								zone[6][i].addPossible();
-							}
-						}
-					}
-				}
-			}
-			//Compute all possibilities for zone7
-			//For each cell in zone7
-			for (int i=0; i<9; i++) {
-				//If the cell is not solved
-				if (!zone[7][i].isSolved()) {
-					//Test the cell for each possible value 1-9
-					for (int j=1; j<=9; j++) {
-						//As long as the value is not already in a solved cell in the zone
-						if (((zone[7][0].isSolved() && zone[7][0].getValue()!=j) || !(zone[7][0].isSolved())) &&
-								((zone[7][1].isSolved() && zone[7][1].getValue()!=j) || !(zone[7][1].isSolved())) &&
-								((zone[7][2].isSolved() && zone[7][2].getValue()!=j) || !(zone[7][2].isSolved())) &&
-								((zone[7][3].isSolved() && zone[7][3].getValue()!=j) || !(zone[7][3].isSolved())) &&
-								((zone[7][4].isSolved() && zone[7][4].getValue()!=j) || !(zone[7][4].isSolved())) &&
-								((zone[7][5].isSolved() && zone[7][5].getValue()!=j) || !(zone[7][5].isSolved())) &&
-								((zone[7][6].isSolved() && zone[7][6].getValue()!=j) || !(zone[7][6].isSolved())) &&
-								((zone[7][7].isSolved() && zone[7][7].getValue()!=j) || !(zone[7][7].isSolved())) &&
-								((zone[7][8].isSolved() && zone[7][8].getValue()!=j) || !(zone[7][8].isSolved()))) {
-							zone[7][i].setValue(j);
-							if (checkCell(zone[7][i])) {
-								zone[7][i].addPossible();
-							}
-						}
-					}
-				}
-			}
-			//Compute all possibilities for zone8
-			//For each cell in zone8
-			for (int i=0; i<9; i++) {
-				//If the cell is not solved
-				if (!zone[8][i].isSolved()) {
-					//Test the cell for each possible value 1-9
-					for (int j=1; j<=9; j++) {
-						//As long as the value is not already in a solved cell in the zone
-						if (((zone[8][0].isSolved() && zone[8][0].getValue()!=j) || !(zone[8][0].isSolved())) &&
-								((zone[8][1].isSolved() && zone[8][1].getValue()!=j) || !(zone[8][1].isSolved())) &&
-								((zone[8][2].isSolved() && zone[8][2].getValue()!=j) || !(zone[8][2].isSolved())) &&
-								((zone[8][3].isSolved() && zone[8][3].getValue()!=j) || !(zone[8][3].isSolved())) &&
-								((zone[8][4].isSolved() && zone[8][4].getValue()!=j) || !(zone[8][4].isSolved())) &&
-								((zone[8][5].isSolved() && zone[8][5].getValue()!=j) || !(zone[8][5].isSolved())) &&
-								((zone[8][6].isSolved() && zone[8][6].getValue()!=j) || !(zone[8][6].isSolved())) &&
-								((zone[8][7].isSolved() && zone[8][7].getValue()!=j) || !(zone[8][7].isSolved())) &&
-								((zone[8][8].isSolved() && zone[8][8].getValue()!=j) || !(zone[8][8].isSolved()))) {
-							zone[8][i].setValue(j);
-							if (checkCell(zone[8][i])) {
-								zone[8][i].addPossible();
+				//For each cell in zone[i]
+				for (int j=0; j<9; j++) {
+					//If the cell is not solved
+					if (!zone[i][j].isSolved()) {
+						//Test the cell for each possible value 1-9
+						for (int k=1; k<=9; k++) {
+							//As long as the value is not already in a solved cell in the zone
+							if (((zone[i][0].isSolved() && zone[i][0].getValue()!=k) || !(zone[i][0].isSolved())) &&
+									((zone[i][1].isSolved() && zone[i][1].getValue()!=k) || !(zone[i][1].isSolved())) &&
+									((zone[i][2].isSolved() && zone[i][2].getValue()!=k) || !(zone[i][2].isSolved())) &&
+									((zone[i][3].isSolved() && zone[i][3].getValue()!=k) || !(zone[i][3].isSolved())) &&
+									((zone[i][4].isSolved() && zone[i][4].getValue()!=k) || !(zone[i][4].isSolved())) &&
+									((zone[i][5].isSolved() && zone[i][5].getValue()!=k) || !(zone[i][5].isSolved())) &&
+									((zone[i][6].isSolved() && zone[i][6].getValue()!=k) || !(zone[i][6].isSolved())) &&
+									((zone[i][7].isSolved() && zone[i][7].getValue()!=k) || !(zone[i][7].isSolved())) &&
+									((zone[i][8].isSolved() && zone[i][8].getValue()!=k) || !(zone[i][8].isSolved()))) {
+								zone[i][j].setValue(k);
+								if (checkCell(zone[i][j])) {
+									zone[i][j].addPossible();
+								}
 							}
 						}
 					}
