@@ -103,14 +103,16 @@ public class TextSolver {
 					}
 				}
 			}
-
+			
+			//TODO Redo XOR statements
 			//Check for cells that only have one possibility and mark them solved
 			for (int i=0; i<9; i++) {
 				for (int j=0; j<9; j++) {
-					//If only one possibility variable is true, solve cell using that value
-					if (field[i][j].isMaybe1() ^ field[i][j].isMaybe2() ^ field[i][j].isMaybe3() ^
+					//If the cell is unsolved and only one possibility variable is true, solve cell using that value
+					if (!field[i][j].isSolved() &&
+							(field[i][j].isMaybe1() ^ field[i][j].isMaybe2() ^ field[i][j].isMaybe3() ^
 							field[i][j].isMaybe4() ^ field[i][j].isMaybe5() ^ field[i][j].isMaybe6() ^
-							field[i][j].isMaybe7() ^ field[i][j].isMaybe8() ^ field[i][j].isMaybe9()) { 
+							field[i][j].isMaybe7() ^ field[i][j].isMaybe8() ^ field[i][j].isMaybe9())) { 
 						if (field[i][j].isMaybe1())
 							field[i][j].setValue(1);
 						if (field[i][j].isMaybe2())
@@ -144,8 +146,8 @@ public class TextSolver {
 						zone[i][6].isMaybe1() ^ zone[i][7].isMaybe1() ^ zone[i][8].isMaybe1()) {
 					//For each cell in the zone				
 					for (int j=0; j<9; j++) {
-						//If isMaybe1 is true for the cell, set value to 1 and mark solved
-						if (zone[i][j].isMaybe1()) {
+						//If the cell is unsolved and isMaybe1 is true for the cell, set value to 1 and mark solved
+						if (!zone[i][j].isSolved() && zone[i][j].isMaybe1()) {
 							zone[i][j].setValue(1);
 							zone[i][j].setSolved(true);
 						}
@@ -161,8 +163,8 @@ public class TextSolver {
 						zone[i][6].isMaybe2() ^ zone[i][7].isMaybe2() ^ zone[i][8].isMaybe2()) {
 					//For each cell in each zone				
 					for (int j=0; j<9; j++) {
-						//If isMaybe2 is true for the cell, set value to 2 and mark solved
-						if (zone[i][j].isMaybe2()) {
+						//If the cell is unsolved and isMaybe2 is true for the cell, set value to 2 and mark solved
+						if (!zone[i][j].isSolved() && zone[i][j].isMaybe2()) {
 							zone[i][j].setValue(2);
 							zone[i][j].setSolved(true);
 						}
@@ -178,8 +180,8 @@ public class TextSolver {
 						zone[i][6].isMaybe3() ^ zone[i][7].isMaybe3() ^ zone[i][8].isMaybe3()) {
 					//For each cell in each zone				
 					for (int j=0; j<9; j++) {
-						//If isMaybe3 is true for the cell, set value to 3 and mark solved
-						if (zone[i][j].isMaybe3()) {
+						//If the cell is unsolved and isMaybe3 is true for the cell, set value to 3 and mark solved
+						if (!zone[i][j].isSolved() && zone[i][j].isMaybe3()) {
 							zone[i][j].setValue(3);
 							zone[i][j].setSolved(true);
 						}
@@ -195,8 +197,8 @@ public class TextSolver {
 						zone[i][6].isMaybe4() ^ zone[i][7].isMaybe4() ^ zone[i][8].isMaybe4()) {
 					//For each cell in each zone				
 					for (int j=0; j<9; j++) {
-						//If isMaybe4 is true for the cell, set value to 4 and mark solved
-						if (zone[i][j].isMaybe4()) {
+						//If the cell is unsolved and isMaybe4 is true for the cell, set value to 4 and mark solved
+						if (!zone[i][j].isSolved() && zone[i][j].isMaybe4()) {
 							zone[i][j].setValue(4);
 							zone[i][j].setSolved(true);
 						}
@@ -212,8 +214,8 @@ public class TextSolver {
 						zone[i][6].isMaybe5() ^ zone[i][7].isMaybe5() ^ zone[i][8].isMaybe5()) {
 					//For each cell in each zone				
 					for (int j=0; j<9; j++) {
-						//If isMaybe5 is true for the cell, set value to 5 and mark solved
-						if (zone[i][j].isMaybe5()) {
+						//If the cell is unsolved and isMaybe5 is true for the cell, set value to 5 and mark solved
+						if (!zone[i][j].isSolved() && zone[i][j].isMaybe5()) {
 							zone[i][j].setValue(5);
 							zone[i][j].setSolved(true);
 						}
@@ -229,8 +231,8 @@ public class TextSolver {
 						zone[i][6].isMaybe6() ^ zone[i][7].isMaybe6() ^ zone[i][8].isMaybe6()) {
 					//For each cell in each zone				
 					for (int j=0; j<9; j++) {
-						//If isMaybe6 is true for the cell, set value to 6 and mark solved
-						if (zone[i][j].isMaybe6()) {
+						//If the cell is unsolved and isMaybe6 is true for the cell, set value to 6 and mark solved
+						if (!zone[i][j].isSolved() && zone[i][j].isMaybe6()) {
 							zone[i][j].setValue(6);
 							zone[i][j].setSolved(true);
 						}
@@ -246,8 +248,8 @@ public class TextSolver {
 						zone[i][6].isMaybe7() ^ zone[i][7].isMaybe7() ^ zone[i][8].isMaybe7()) {
 					//For each cell in each zone				
 					for (int j=0; j<9; j++) {
-						//If isMaybe7 is true for the cell, set value to 7 and mark solved
-						if (zone[i][j].isMaybe7()) {
+						//If the cell is unsolved and isMaybe7 is true for the cell, set value to 7 and mark solved
+						if (!zone[i][j].isSolved() && zone[i][j].isMaybe7()) {
 							zone[i][j].setValue(7);
 							zone[i][j].setSolved(true);
 						}
@@ -263,8 +265,8 @@ public class TextSolver {
 						zone[i][6].isMaybe8() ^ zone[i][7].isMaybe8() ^ zone[i][8].isMaybe8()) {
 					//For each cell in each zone				
 					for (int j=0; j<9; j++) {
-						//If isMaybe8 is true for the cell, set value to 8 and mark solved
-						if (zone[i][j].isMaybe8()) {
+						//If the cell is unsolved and isMaybe8 is true for the cell, set value to 8 and mark solved
+						if (!zone[i][j].isSolved() && zone[i][j].isMaybe8()) {
 							zone[i][j].setValue(8);
 							zone[i][j].setSolved(true);
 						}
@@ -280,8 +282,8 @@ public class TextSolver {
 						zone[i][6].isMaybe9() ^ zone[i][7].isMaybe9() ^ zone[i][8].isMaybe9()) {
 					//For each cell in each zone				
 					for (int j=0; j<9; j++) {
-						//If isMaybe9 is true for the cell, set value to 9 and mark solved
-						if (zone[i][j].isMaybe9()) {
+						//If the cell is unsolved and isMaybe9 is true for the cell, set value to 9 and mark solved
+						if (!zone[i][j].isSolved() && zone[i][j].isMaybe9()) {
 							zone[i][j].setValue(9);
 							zone[i][j].setSolved(true);
 						}
@@ -361,3 +363,6 @@ public class TextSolver {
 
 //Test puzzle
 // 0 8 5 3 2 4 9 6 7 0 4 6 1 8 7 5 2 3 0 7 3 9 5 6 1 8 4 0 2 4 6 1 3 7 5 9 0 1 9 5 7 8 3 4 2 0 5 7 4 9 2 8 1 6 0 3 2 7 4 1 6 9 8 0 9 8 2 6 5 4 3 1 0 6 1 8 3 9 2 7 5
+
+//Random test puzzle
+// 0 0 0 0 9 0 0 5 0 7 0 0 0 4 5 0 2 3 0 0 3 0 8 0 0 6 7 0 0 4 0 2 9 0 0 8 2 3 9 0 0 0 7 1 6 1 0 0 7 3 0 2 0 0 9 1 0 0 6 0 3 0 0 5 2 0 4 7 0 0 0 9 0 4 0 0 1 0 0 0 0
