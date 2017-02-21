@@ -111,42 +111,25 @@ public class TextSolver {
 					if (field[i][j].isMaybe1() ^ field[i][j].isMaybe2() ^ field[i][j].isMaybe3() ^
 							field[i][j].isMaybe4() ^ field[i][j].isMaybe5() ^ field[i][j].isMaybe6() ^
 							field[i][j].isMaybe7() ^ field[i][j].isMaybe8() ^ field[i][j].isMaybe9()) { 
-						if (field[i][j].isMaybe1()) {
+						if (field[i][j].isMaybe1())
 							field[i][j].setValue(1);
-							field[i][j].setSolved(true);
-						}
-						if (field[i][j].isMaybe2()) {
+						if (field[i][j].isMaybe2())
 							field[i][j].setValue(2);
-							field[i][j].setSolved(true);
-						}
-						if (field[i][j].isMaybe3()) {
+						if (field[i][j].isMaybe3())
 							field[i][j].setValue(3);
-							field[i][j].setSolved(true);
-						}
-						if (field[i][j].isMaybe4()) {
+						if (field[i][j].isMaybe4())
 							field[i][j].setValue(4);
-							field[i][j].setSolved(true);
-						}
-						if (field[i][j].isMaybe5()) {
+						if (field[i][j].isMaybe5())
 							field[i][j].setValue(5);
-							field[i][j].setSolved(true);
-						}
-						if (field[i][j].isMaybe6()) {
+						if (field[i][j].isMaybe6())
 							field[i][j].setValue(6);
-							field[i][j].setSolved(true);
-						}
-						if (field[i][j].isMaybe7()) {
+						if (field[i][j].isMaybe7())
 							field[i][j].setValue(7);
-							field[i][j].setSolved(true);
-						}
-						if (field[i][j].isMaybe8()) {
+						if (field[i][j].isMaybe8())
 							field[i][j].setValue(8);
-							field[i][j].setSolved(true);
-						}
-						if (field[i][j].isMaybe9()) {
+						if (field[i][j].isMaybe9())
 							field[i][j].setValue(9);
-							field[i][j].setSolved(true);
-						}
+						field[i][j].setSolved(true);
 					}
 				}
 			}
