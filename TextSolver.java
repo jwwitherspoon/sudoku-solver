@@ -213,7 +213,7 @@ public class TextSolver {
 	}
 	
 	//Helper method to check if the entire puzzle has been solved
-	//If one cell is unsolved, return false; otherwise return true
+	//If any cell is unsolved, return false; otherwise return true
 	public static boolean checkPuzzle() {
 		for (int i=0; i<9; i++) {
 			for (int j=0; j<9; j++) {
