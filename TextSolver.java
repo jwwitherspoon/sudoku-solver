@@ -134,27 +134,177 @@ public class TextSolver {
 				}
 			}
 			
-			//TODO Finish section
-			//Check for cells that are the only possibility for a number in a row
+			//Check for cells that are the only possibility for a number in a zone
+			//Check for number 1
+			//For each zone
+			for (int i=0; i<9; i++) {
+				//If isMaybe1 is true for only one cell in the zone
+				if (zone[i][0].isMaybe1() ^ zone[i][1].isMaybe1() ^ zone[i][2].isMaybe1() ^
+						zone[i][3].isMaybe1() ^ zone[i][4].isMaybe1() ^ zone[i][5].isMaybe1() ^
+						zone[i][6].isMaybe1() ^ zone[i][7].isMaybe1() ^ zone[i][8].isMaybe1()) {
+					//For each cell in the zone				
+					for (int j=0; j<9; j++) {
+						//If isMaybe1 is true for the cell, set value to 1 and mark solved
+						if (zone[i][j].isMaybe1()) {
+							zone[i][j].setValue(1);
+							zone[i][j].setSolved(true);
+						}
+					}
+				}
+			}
+			//Check for number 2
+			//For each zone
+			for (int i=0; i<9; i++) {
+				//If isMaybe2 is true for only one cell in the zone
+				if (zone[i][0].isMaybe2() ^ zone[i][1].isMaybe2() ^ zone[i][2].isMaybe2() ^
+						zone[i][3].isMaybe2() ^ zone[i][4].isMaybe2() ^ zone[i][5].isMaybe2() ^
+						zone[i][6].isMaybe2() ^ zone[i][7].isMaybe2() ^ zone[i][8].isMaybe2()) {
+					//For each cell in each zone				
+					for (int j=0; j<9; j++) {
+						//If isMaybe2 is true for the cell, set value to 2 and mark solved
+						if (zone[i][j].isMaybe2()) {
+							zone[i][j].setValue(2);
+							zone[i][j].setSolved(true);
+						}
+					}
+				}
+			}
+			//Check for number 3
+			//For each zone
+			for (int i=0; i<9; i++) {
+				//If isMaybe3 is true for only one cell in the zone
+				if (zone[i][0].isMaybe3() ^ zone[i][1].isMaybe3() ^ zone[i][2].isMaybe3() ^
+						zone[i][3].isMaybe3() ^ zone[i][4].isMaybe3() ^ zone[i][5].isMaybe3() ^
+						zone[i][6].isMaybe3() ^ zone[i][7].isMaybe3() ^ zone[i][8].isMaybe3()) {
+					//For each cell in each zone				
+					for (int j=0; j<9; j++) {
+						//If isMaybe3 is true for the cell, set value to 3 and mark solved
+						if (zone[i][j].isMaybe3()) {
+							zone[i][j].setValue(3);
+							zone[i][j].setSolved(true);
+						}
+					}
+				}
+			}
+			//Check for number 4
+			//For each zone
+			for (int i=0; i<9; i++) {
+				//If isMaybe4 is true for only one cell in the zone
+				if (zone[i][0].isMaybe4() ^ zone[i][1].isMaybe4() ^ zone[i][2].isMaybe4() ^
+						zone[i][3].isMaybe4() ^ zone[i][4].isMaybe4() ^ zone[i][5].isMaybe4() ^
+						zone[i][6].isMaybe4() ^ zone[i][7].isMaybe4() ^ zone[i][8].isMaybe4()) {
+					//For each cell in each zone				
+					for (int j=0; j<9; j++) {
+						//If isMaybe4 is true for the cell, set value to 4 and mark solved
+						if (zone[i][j].isMaybe4()) {
+							zone[i][j].setValue(4);
+							zone[i][j].setSolved(true);
+						}
+					}
+				}
+			}
+			//Check for number 5
+			//For each zone
+			for (int i=0; i<9; i++) {
+				//If isMaybe5 is true for only one cell in the zone
+				if (zone[i][0].isMaybe5() ^ zone[i][1].isMaybe5() ^ zone[i][2].isMaybe5() ^
+						zone[i][3].isMaybe5() ^ zone[i][4].isMaybe5() ^ zone[i][5].isMaybe5() ^
+						zone[i][6].isMaybe5() ^ zone[i][7].isMaybe5() ^ zone[i][8].isMaybe5()) {
+					//For each cell in each zone				
+					for (int j=0; j<9; j++) {
+						//If isMaybe5 is true for the cell, set value to 5 and mark solved
+						if (zone[i][j].isMaybe5()) {
+							zone[i][j].setValue(5);
+							zone[i][j].setSolved(true);
+						}
+					}
+				}
+			}
+			//Check for number 6
+			//For each zone
+			for (int i=0; i<9; i++) {
+				//If isMaybe6 is true for only one cell in the zone
+				if (zone[i][0].isMaybe6() ^ zone[i][1].isMaybe6() ^ zone[i][2].isMaybe6() ^
+						zone[i][3].isMaybe6() ^ zone[i][4].isMaybe6() ^ zone[i][5].isMaybe6() ^
+						zone[i][6].isMaybe6() ^ zone[i][7].isMaybe6() ^ zone[i][8].isMaybe6()) {
+					//For each cell in each zone				
+					for (int j=0; j<9; j++) {
+						//If isMaybe6 is true for the cell, set value to 6 and mark solved
+						if (zone[i][j].isMaybe6()) {
+							zone[i][j].setValue(6);
+							zone[i][j].setSolved(true);
+						}
+					}
+				}
+			}
+			//Check for number 7
+			//For each zone
+			for (int i=0; i<9; i++) {
+				//If isMaybe7 is true for only one cell in the zone
+				if (zone[i][0].isMaybe7() ^ zone[i][1].isMaybe7() ^ zone[i][2].isMaybe7() ^
+						zone[i][3].isMaybe7() ^ zone[i][4].isMaybe7() ^ zone[i][5].isMaybe7() ^
+						zone[i][6].isMaybe7() ^ zone[i][7].isMaybe7() ^ zone[i][8].isMaybe7()) {
+					//For each cell in each zone				
+					for (int j=0; j<9; j++) {
+						//If isMaybe7 is true for the cell, set value to 7 and mark solved
+						if (zone[i][j].isMaybe7()) {
+							zone[i][j].setValue(7);
+							zone[i][j].setSolved(true);
+						}
+					}
+				}
+			}
+			//Check for number 8
+			//For each zone
+			for (int i=0; i<9; i++) {
+				//If isMaybe1 is true for only one cell in the zone
+				if (zone[i][0].isMaybe8() ^ zone[i][1].isMaybe8() ^ zone[i][2].isMaybe8() ^
+						zone[i][3].isMaybe8() ^ zone[i][4].isMaybe8() ^ zone[i][5].isMaybe8() ^
+						zone[i][6].isMaybe8() ^ zone[i][7].isMaybe8() ^ zone[i][8].isMaybe8()) {
+					//For each cell in each zone				
+					for (int j=0; j<9; j++) {
+						//If isMaybe8 is true for the cell, set value to 8 and mark solved
+						if (zone[i][j].isMaybe8()) {
+							zone[i][j].setValue(8);
+							zone[i][j].setSolved(true);
+						}
+					}
+				}
+			}
+			//Check for number 9
+			//For each zone
+			for (int i=0; i<9; i++) {
+				//If isMaybe9 is true for only one cell in the zone
+				if (zone[i][0].isMaybe9() ^ zone[i][1].isMaybe9() ^ zone[i][2].isMaybe9() ^
+						zone[i][3].isMaybe9() ^ zone[i][4].isMaybe9() ^ zone[i][5].isMaybe9() ^
+						zone[i][6].isMaybe9() ^ zone[i][7].isMaybe9() ^ zone[i][8].isMaybe9()) {
+					//For each cell in each zone				
+					for (int j=0; j<9; j++) {
+						//If isMaybe9 is true for the cell, set value to 9 and mark solved
+						if (zone[i][j].isMaybe9()) {
+							zone[i][j].setValue(9);
+							zone[i][j].setSolved(true);
+						}
+					}
+				}
+			}
 
 			//Check to see if the entire puzzle is solved
-			//If yes, break while loop; if no, reset possibilities for all unsolved cells
+			//If yes, break while loop; if no, reset possibilities for all cells
 			if (checkPuzzle()) {
 				puzzleSolved = true;
 			} else {
 				for (int i=0; i<9; i++) {
 					for (int j=0; j<9; j++) {
-						if (!field[i][j].isSolved()) {
-							field[i][j].setMaybe1(false);
-							field[i][j].setMaybe2(false);
-							field[i][j].setMaybe3(false);
-							field[i][j].setMaybe4(false);
-							field[i][j].setMaybe5(false);
-							field[i][j].setMaybe6(false);
-							field[i][j].setMaybe7(false);
-							field[i][j].setMaybe8(false);
-							field[i][j].setMaybe9(false);
-						}
+						field[i][j].setMaybe1(false);
+						field[i][j].setMaybe2(false);
+						field[i][j].setMaybe3(false);
+						field[i][j].setMaybe4(false);
+						field[i][j].setMaybe5(false);
+						field[i][j].setMaybe6(false);
+						field[i][j].setMaybe7(false);
+						field[i][j].setMaybe8(false);
+						field[i][j].setMaybe9(false);
 					}
 				}
 			}
