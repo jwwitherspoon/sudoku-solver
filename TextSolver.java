@@ -307,23 +307,21 @@ public class TextSolver {
 			}
 
 			//Check to see if the entire puzzle is solved
-			//If yes, break while loop; if no, reset possibilities for all unsolved cells
+			//If yes, break while loop; if no, reset possibilities for all cells
 			if (checkPuzzle()) {
 				puzzleSolved = true;
 			} else {
 				for (int i=0; i<9; i++) {
 					for (int j=0; j<9; j++) {
-						if (!field[i][j].isSolved()) {
-							field[i][j].setMaybe1(false);
-							field[i][j].setMaybe2(false);
-							field[i][j].setMaybe3(false);
-							field[i][j].setMaybe4(false);
-							field[i][j].setMaybe5(false);
-							field[i][j].setMaybe6(false);
-							field[i][j].setMaybe7(false);
-							field[i][j].setMaybe8(false);
-							field[i][j].setMaybe9(false);
-						}
+						field[i][j].setMaybe1(false);
+						field[i][j].setMaybe2(false);
+						field[i][j].setMaybe3(false);
+						field[i][j].setMaybe4(false);
+						field[i][j].setMaybe5(false);
+						field[i][j].setMaybe6(false);
+						field[i][j].setMaybe7(false);
+						field[i][j].setMaybe8(false);
+						field[i][j].setMaybe9(false);
 					}
 				}
 			}
