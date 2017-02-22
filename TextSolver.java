@@ -104,192 +104,71 @@ public class TextSolver {
 				}
 			}
 			
-			//TODO Redo XOR statements
 			//Check for cells that only have one possibility and mark them solved
 			for (int i=0; i<9; i++) {
 				for (int j=0; j<9; j++) {
 					//If the cell is unsolved and only one possibility variable is true, solve cell using that value
-					if (!field[i][j].isSolved() &&
-							(field[i][j].isMaybe1() ^ field[i][j].isMaybe2() ^ field[i][j].isMaybe3() ^
-							field[i][j].isMaybe4() ^ field[i][j].isMaybe5() ^ field[i][j].isMaybe6() ^
-							field[i][j].isMaybe7() ^ field[i][j].isMaybe8() ^ field[i][j].isMaybe9())) { 
-						if (field[i][j].isMaybe1())
+					if (!field[i][j].isSolved()) { 
+						if (field[i][j].isMaybe1() && !field[i][j].isMaybe2() && !field[i][j].isMaybe3() &&
+								!field[i][j].isMaybe4() && !field[i][j].isMaybe5() && !field[i][j].isMaybe6() &&
+								!field[i][j].isMaybe7() && !field[i][j].isMaybe8() && !field[i][j].isMaybe9()) {
 							field[i][j].setValue(1);
-						if (field[i][j].isMaybe2())
+							field[i][j].setSolved(true);
+						}
+						if (!field[i][j].isMaybe1() && field[i][j].isMaybe2() && !field[i][j].isMaybe3() &&
+								!field[i][j].isMaybe4() && !field[i][j].isMaybe5() && !field[i][j].isMaybe6() &&
+								!field[i][j].isMaybe7() && !field[i][j].isMaybe8() && !field[i][j].isMaybe9()) {
 							field[i][j].setValue(2);
-						if (field[i][j].isMaybe3())
+							field[i][j].setSolved(true);
+						}
+						if (!field[i][j].isMaybe1() && !field[i][j].isMaybe2() && field[i][j].isMaybe3() &&
+								!field[i][j].isMaybe4() && !field[i][j].isMaybe5() && !field[i][j].isMaybe6() &&
+								!field[i][j].isMaybe7() && !field[i][j].isMaybe8() && !field[i][j].isMaybe9()) {
 							field[i][j].setValue(3);
-						if (field[i][j].isMaybe4())
+							field[i][j].setSolved(true);
+						}
+						if (!field[i][j].isMaybe1() && !field[i][j].isMaybe2() && !field[i][j].isMaybe3() &&
+								field[i][j].isMaybe4() && !field[i][j].isMaybe5() && !field[i][j].isMaybe6() &&
+								!field[i][j].isMaybe7() && !field[i][j].isMaybe8() && !field[i][j].isMaybe9()) {
 							field[i][j].setValue(4);
-						if (field[i][j].isMaybe5())
+							field[i][j].setSolved(true);
+						}
+						if (!field[i][j].isMaybe1() && !field[i][j].isMaybe2() && !field[i][j].isMaybe3() &&
+								!field[i][j].isMaybe4() && field[i][j].isMaybe5() && !field[i][j].isMaybe6() &&
+								!field[i][j].isMaybe7() && !field[i][j].isMaybe8() && !field[i][j].isMaybe9()) {
 							field[i][j].setValue(5);
-						if (field[i][j].isMaybe6())
+							field[i][j].setSolved(true);
+						}
+						if (!field[i][j].isMaybe1() && !field[i][j].isMaybe2() && !field[i][j].isMaybe3() &&
+								!field[i][j].isMaybe4() && !field[i][j].isMaybe5() && field[i][j].isMaybe6() &&
+								!field[i][j].isMaybe7() && !field[i][j].isMaybe8() && !field[i][j].isMaybe9()) {
 							field[i][j].setValue(6);
-						if (field[i][j].isMaybe7())
+							field[i][j].setSolved(true);
+						}
+						if (!field[i][j].isMaybe1() && !field[i][j].isMaybe2() && !field[i][j].isMaybe3() &&
+								!field[i][j].isMaybe4() && !field[i][j].isMaybe5() && !field[i][j].isMaybe6() &&
+								field[i][j].isMaybe7() && !field[i][j].isMaybe8() && !field[i][j].isMaybe9()) {
 							field[i][j].setValue(7);
-						if (field[i][j].isMaybe8())
+							field[i][j].setSolved(true);
+						}
+						if (!field[i][j].isMaybe1() && !field[i][j].isMaybe2() && !field[i][j].isMaybe3() &&
+								!field[i][j].isMaybe4() && !field[i][j].isMaybe5() && !field[i][j].isMaybe6() &&
+								!field[i][j].isMaybe7() && field[i][j].isMaybe8() && !field[i][j].isMaybe9()) {
 							field[i][j].setValue(8);
-						if (field[i][j].isMaybe9())
+							field[i][j].setSolved(true);
+						}
+						if (!field[i][j].isMaybe1() && !field[i][j].isMaybe2() && !field[i][j].isMaybe3() &&
+								!field[i][j].isMaybe4() && !field[i][j].isMaybe5() && !field[i][j].isMaybe6() &&
+								!field[i][j].isMaybe7() && !field[i][j].isMaybe8() && field[i][j].isMaybe9()) {
 							field[i][j].setValue(9);
-						field[i][j].setSolved(true);
+							field[i][j].setSolved(true);
+						}
 					}
 				}
 			}
 			
-			//Check for cells that are the only possibility for a number in a zone
-			//Check for number 1
-			//For each zone
-			for (int i=0; i<9; i++) {
-				//If isMaybe1 is true for only one cell in the zone
-				if (zone[i][0].isMaybe1() ^ zone[i][1].isMaybe1() ^ zone[i][2].isMaybe1() ^
-						zone[i][3].isMaybe1() ^ zone[i][4].isMaybe1() ^ zone[i][5].isMaybe1() ^
-						zone[i][6].isMaybe1() ^ zone[i][7].isMaybe1() ^ zone[i][8].isMaybe1()) {
-					//For each cell in the zone				
-					for (int j=0; j<9; j++) {
-						//If the cell is unsolved and isMaybe1 is true for the cell, set value to 1 and mark solved
-						if (!zone[i][j].isSolved() && zone[i][j].isMaybe1()) {
-							zone[i][j].setValue(1);
-							zone[i][j].setSolved(true);
-						}
-					}
-				}
-			}
-			//Check for number 2
-			//For each zone
-			for (int i=0; i<9; i++) {
-				//If isMaybe2 is true for only one cell in the zone
-				if (zone[i][0].isMaybe2() ^ zone[i][1].isMaybe2() ^ zone[i][2].isMaybe2() ^
-						zone[i][3].isMaybe2() ^ zone[i][4].isMaybe2() ^ zone[i][5].isMaybe2() ^
-						zone[i][6].isMaybe2() ^ zone[i][7].isMaybe2() ^ zone[i][8].isMaybe2()) {
-					//For each cell in each zone				
-					for (int j=0; j<9; j++) {
-						//If the cell is unsolved and isMaybe2 is true for the cell, set value to 2 and mark solved
-						if (!zone[i][j].isSolved() && zone[i][j].isMaybe2()) {
-							zone[i][j].setValue(2);
-							zone[i][j].setSolved(true);
-						}
-					}
-				}
-			}
-			//Check for number 3
-			//For each zone
-			for (int i=0; i<9; i++) {
-				//If isMaybe3 is true for only one cell in the zone
-				if (zone[i][0].isMaybe3() ^ zone[i][1].isMaybe3() ^ zone[i][2].isMaybe3() ^
-						zone[i][3].isMaybe3() ^ zone[i][4].isMaybe3() ^ zone[i][5].isMaybe3() ^
-						zone[i][6].isMaybe3() ^ zone[i][7].isMaybe3() ^ zone[i][8].isMaybe3()) {
-					//For each cell in each zone				
-					for (int j=0; j<9; j++) {
-						//If the cell is unsolved and isMaybe3 is true for the cell, set value to 3 and mark solved
-						if (!zone[i][j].isSolved() && zone[i][j].isMaybe3()) {
-							zone[i][j].setValue(3);
-							zone[i][j].setSolved(true);
-						}
-					}
-				}
-			}
-			//Check for number 4
-			//For each zone
-			for (int i=0; i<9; i++) {
-				//If isMaybe4 is true for only one cell in the zone
-				if (zone[i][0].isMaybe4() ^ zone[i][1].isMaybe4() ^ zone[i][2].isMaybe4() ^
-						zone[i][3].isMaybe4() ^ zone[i][4].isMaybe4() ^ zone[i][5].isMaybe4() ^
-						zone[i][6].isMaybe4() ^ zone[i][7].isMaybe4() ^ zone[i][8].isMaybe4()) {
-					//For each cell in each zone				
-					for (int j=0; j<9; j++) {
-						//If the cell is unsolved and isMaybe4 is true for the cell, set value to 4 and mark solved
-						if (!zone[i][j].isSolved() && zone[i][j].isMaybe4()) {
-							zone[i][j].setValue(4);
-							zone[i][j].setSolved(true);
-						}
-					}
-				}
-			}
-			//Check for number 5
-			//For each zone
-			for (int i=0; i<9; i++) {
-				//If isMaybe5 is true for only one cell in the zone
-				if (zone[i][0].isMaybe5() ^ zone[i][1].isMaybe5() ^ zone[i][2].isMaybe5() ^
-						zone[i][3].isMaybe5() ^ zone[i][4].isMaybe5() ^ zone[i][5].isMaybe5() ^
-						zone[i][6].isMaybe5() ^ zone[i][7].isMaybe5() ^ zone[i][8].isMaybe5()) {
-					//For each cell in each zone				
-					for (int j=0; j<9; j++) {
-						//If the cell is unsolved and isMaybe5 is true for the cell, set value to 5 and mark solved
-						if (!zone[i][j].isSolved() && zone[i][j].isMaybe5()) {
-							zone[i][j].setValue(5);
-							zone[i][j].setSolved(true);
-						}
-					}
-				}
-			}
-			//Check for number 6
-			//For each zone
-			for (int i=0; i<9; i++) {
-				//If isMaybe6 is true for only one cell in the zone
-				if (zone[i][0].isMaybe6() ^ zone[i][1].isMaybe6() ^ zone[i][2].isMaybe6() ^
-						zone[i][3].isMaybe6() ^ zone[i][4].isMaybe6() ^ zone[i][5].isMaybe6() ^
-						zone[i][6].isMaybe6() ^ zone[i][7].isMaybe6() ^ zone[i][8].isMaybe6()) {
-					//For each cell in each zone				
-					for (int j=0; j<9; j++) {
-						//If the cell is unsolved and isMaybe6 is true for the cell, set value to 6 and mark solved
-						if (!zone[i][j].isSolved() && zone[i][j].isMaybe6()) {
-							zone[i][j].setValue(6);
-							zone[i][j].setSolved(true);
-						}
-					}
-				}
-			}
-			//Check for number 7
-			//For each zone
-			for (int i=0; i<9; i++) {
-				//If isMaybe7 is true for only one cell in the zone
-				if (zone[i][0].isMaybe7() ^ zone[i][1].isMaybe7() ^ zone[i][2].isMaybe7() ^
-						zone[i][3].isMaybe7() ^ zone[i][4].isMaybe7() ^ zone[i][5].isMaybe7() ^
-						zone[i][6].isMaybe7() ^ zone[i][7].isMaybe7() ^ zone[i][8].isMaybe7()) {
-					//For each cell in each zone				
-					for (int j=0; j<9; j++) {
-						//If the cell is unsolved and isMaybe7 is true for the cell, set value to 7 and mark solved
-						if (!zone[i][j].isSolved() && zone[i][j].isMaybe7()) {
-							zone[i][j].setValue(7);
-							zone[i][j].setSolved(true);
-						}
-					}
-				}
-			}
-			//Check for number 8
-			//For each zone
-			for (int i=0; i<9; i++) {
-				//If isMaybe1 is true for only one cell in the zone
-				if (zone[i][0].isMaybe8() ^ zone[i][1].isMaybe8() ^ zone[i][2].isMaybe8() ^
-						zone[i][3].isMaybe8() ^ zone[i][4].isMaybe8() ^ zone[i][5].isMaybe8() ^
-						zone[i][6].isMaybe8() ^ zone[i][7].isMaybe8() ^ zone[i][8].isMaybe8()) {
-					//For each cell in each zone				
-					for (int j=0; j<9; j++) {
-						//If the cell is unsolved and isMaybe8 is true for the cell, set value to 8 and mark solved
-						if (!zone[i][j].isSolved() && zone[i][j].isMaybe8()) {
-							zone[i][j].setValue(8);
-							zone[i][j].setSolved(true);
-						}
-					}
-				}
-			}
-			//Check for number 9
-			//For each zone
-			for (int i=0; i<9; i++) {
-				//If isMaybe9 is true for only one cell in the zone
-				if (zone[i][0].isMaybe9() ^ zone[i][1].isMaybe9() ^ zone[i][2].isMaybe9() ^
-						zone[i][3].isMaybe9() ^ zone[i][4].isMaybe9() ^ zone[i][5].isMaybe9() ^
-						zone[i][6].isMaybe9() ^ zone[i][7].isMaybe9() ^ zone[i][8].isMaybe9()) {
-					//For each cell in each zone				
-					for (int j=0; j<9; j++) {
-						//If the cell is unsolved and isMaybe9 is true for the cell, set value to 9 and mark solved
-						if (!zone[i][j].isSolved() && zone[i][j].isMaybe9()) {
-							zone[i][j].setValue(9);
-							zone[i][j].setSolved(true);
-						}
-					}
-				}
-			}
+			//Print the possibilities for each cell after each iteration of the solution algorithm
+			printPossible();
 
 			//Check to see if the entire puzzle is solved
 			//If yes, break while loop; if no, reset possibilities for all cells
@@ -313,16 +192,50 @@ public class TextSolver {
 		}
 
 		//Print the solved puzzle
-		print(field);
+		print();
 	}
 	
 	//Helper method to print the puzzle
-	public static void print(Cell[][] field) {
+	public static void print() {
 		for (int i=0; i<9; i++) {
 			for (int j=0; j<9; j++)
 				System.out.print(field[i][j].getValue() + " ");
 			System.out.println("");
 		}
+	}
+	
+	//Helper method to print the puzzle after each iteration of the solution algorithm
+	//For testing purposes only
+	public static void printPossible() {
+		for (int i=0; i<9; i++) {
+			for (int j=0; j<9; j++) {
+				if (field[i][j].isSolved())
+					System.out.print(field[i][j].getValue() + "\t");
+				else {
+					if (field[i][j].isMaybe1())
+						System.out.print("1");
+					if (field[i][j].isMaybe2())
+						System.out.print("2");
+					if (field[i][j].isMaybe3())
+						System.out.print("3");
+					if (field[i][j].isMaybe4())
+						System.out.print("4");
+					if (field[i][j].isMaybe5())
+						System.out.print("5");
+					if (field[i][j].isMaybe6())
+						System.out.print("6");
+					if (field[i][j].isMaybe7())
+						System.out.print("7");
+					if (field[i][j].isMaybe8())
+						System.out.print("8");
+					if (field[i][j].isMaybe9())
+						System.out.print("9");
+					System.out.print("\t");
+				}
+			}
+			System.out.println("");
+		}
+		System.out.println("");
 	}
 	
 	//Helper method to check to see if the value of a cell can work for that cell
