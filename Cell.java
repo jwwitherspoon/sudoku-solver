@@ -4,24 +4,22 @@ public class Cell {
 	//Value stores the number that fits in the cell
 	//The maybe variables tell whether it is possible for a number to fit in that cell previously solved cells
 	//Solved tells whether or not the cell has been solved completely
-	//All cells start with a default of unsolved; constructor or setter method can change this
+	//All cells start with a default of unsolved; setSolved() can change this
 	private int zone, row, column;
 	private int value;
 	private boolean maybe1, maybe2, maybe3, maybe4, maybe5, maybe6, maybe7, maybe8, maybe9;
 	private boolean solved = false;
 	
-	//Row and column can only be set by the constructor at the moment of instantiation; zone is set afterward
-	public Cell(int row, int column) {
+	//Row, column, and zone can only be set by the constructor at the moment of instantiation
+	public Cell(int row, int column, int zone) {
 		this.row = row;
 		this.column = column;
+		this.zone = zone;
 	}
 	
-	//Getters for row and column; getters and setters for the the rest of the variables
+	//Getters for row, column, and zone; getters and setters for the the rest of the variables
 	public int getZone() {
 		return this.zone;
-	}
-	public void setZone(int zone) {
-		this.zone = zone;
 	}
 	public int getRow() {
 		return this.row;
@@ -96,6 +94,7 @@ public class Cell {
 		this.solved = solved;
 	}
 	
+	//Helper method to add the value of the cell to its possibilities
 	public void addPossible() {
 		switch (this.value) {
 			case 1:
@@ -127,6 +126,61 @@ public class Cell {
 				break;
 			default:
 				break;
+		}
+	}
+	
+	//Reset the possibilities for the cell
+	public void resetPossible() {
+		setMaybe1(false);
+		setMaybe2(false);
+		setMaybe3(false);
+		setMaybe4(false);
+		setMaybe5(false);
+		setMaybe6(false);
+		setMaybe7(false);
+		setMaybe8(false);
+		setMaybe9(false);
+	}
+	
+	//If the cell is unsolved and only one possibility variable is true, solve cell using that value
+	public void candidateCheck() {
+		if (!isSolved()) { 
+			if (isMaybe1() && !isMaybe2() && !isMaybe3() && !isMaybe4() && !isMaybe5() && !isMaybe6() && !isMaybe7() && !isMaybe8() && !isMaybe9()) {
+				setValue(1);
+				setSolved(true);
+			}
+			if (!isMaybe1() && isMaybe2() && !isMaybe3() && !isMaybe4() && !isMaybe5() && !isMaybe6() && !isMaybe7() && !isMaybe8() && !isMaybe9()) {
+				setValue(2);
+				setSolved(true);
+			}
+			if (!isMaybe1() && !isMaybe2() && isMaybe3() && !isMaybe4() && !isMaybe5() && !isMaybe6() && !isMaybe7() && !isMaybe8() && !isMaybe9()) {
+				setValue(3);
+				setSolved(true);
+			}
+			if (!isMaybe1() && !isMaybe2() && !isMaybe3() && isMaybe4() && !isMaybe5() && !isMaybe6() && !isMaybe7() && !isMaybe8() && !isMaybe9()) {
+				setValue(4);
+				setSolved(true);
+			}
+			if (!isMaybe1() && !isMaybe2() && !isMaybe3() && !isMaybe4() && isMaybe5() && !isMaybe6() && !isMaybe7() && !isMaybe8() && !isMaybe9()) {
+				setValue(5);
+				setSolved(true);
+			}
+			if (!isMaybe1() && !isMaybe2() && !isMaybe3() && !isMaybe4() && !isMaybe5() && isMaybe6() && !isMaybe7() && !isMaybe8() && !isMaybe9()) {
+				setValue(6);
+				setSolved(true);
+			}
+			if (!isMaybe1() && !isMaybe2() && !isMaybe3() && !isMaybe4() && !isMaybe5() && !isMaybe6() && isMaybe7() && !isMaybe8() && !isMaybe9()) {
+				setValue(7);
+				setSolved(true);
+			}
+			if (!isMaybe1() && !isMaybe2() && !isMaybe3() && !isMaybe4() && !isMaybe5() && !isMaybe6() && !isMaybe7() && isMaybe8() && !isMaybe9()) {
+				setValue(8);
+				setSolved(true);
+			}
+			if (!isMaybe1() && !isMaybe2() && !isMaybe3() && !isMaybe4() && !isMaybe5() && !isMaybe6() && !isMaybe7() && !isMaybe8() && isMaybe9()) {
+				setValue(9);
+				setSolved(true);
+			}
 		}
 	}
 }
