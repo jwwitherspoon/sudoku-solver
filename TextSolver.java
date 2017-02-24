@@ -1,87 +1,65 @@
 import java.util.Scanner;
 
 //TODO Handle exception where puzzle cannot be solved
-//TODO Handle exception where puzzle requires some guesswork
 
 public class TextSolver {
 	//Create game board as a 2D array
+	//Populate field with cells; make row, column, and zone values in cells correspond to row, column, and zone number
 	//First dimension is row, second dimension is column
-	private static Cell[][] field = new Cell[9][9];
+	private static Cell[][] field = {{new Cell(0,0,0), new Cell(0,1,0), new Cell(0,2,0), new Cell(0,3,1), new Cell(0,4,1), new Cell(0,5,1), new Cell(0,6,2), new Cell(0,7,2), new Cell(0,8,2)},
+										{new Cell(1,0,0), new Cell(1,1,0), new Cell(1,2,0), new Cell(1,3,1), new Cell(1,4,1), new Cell(1,5,1), new Cell(1,6,2), new Cell(1,7,2), new Cell(1,8,2)},
+										{new Cell(2,0,0), new Cell(2,1,0), new Cell(2,2,0), new Cell(2,3,1), new Cell(2,4,1), new Cell(2,5,1), new Cell(2,6,2), new Cell(2,7,2), new Cell(2,8,2)},
+										{new Cell(3,0,3), new Cell(3,1,3), new Cell(3,2,3), new Cell(3,3,4), new Cell(3,4,4), new Cell(3,5,4), new Cell(3,6,5), new Cell(3,7,5), new Cell(3,8,5)},
+										{new Cell(4,0,3), new Cell(4,1,3), new Cell(4,2,3), new Cell(4,3,4), new Cell(4,4,4), new Cell(4,5,4), new Cell(4,6,5), new Cell(4,7,5), new Cell(4,8,5)},
+										{new Cell(5,0,3), new Cell(5,1,3), new Cell(5,2,3), new Cell(5,3,4), new Cell(5,4,4), new Cell(5,5,4), new Cell(5,6,5), new Cell(5,7,5), new Cell(5,8,5)},
+										{new Cell(6,0,6), new Cell(6,1,6), new Cell(6,2,6), new Cell(6,3,7), new Cell(6,4,7), new Cell(6,5,7), new Cell(6,6,8), new Cell(6,7,8), new Cell(6,8,8)},
+										{new Cell(7,0,6), new Cell(7,1,6), new Cell(7,2,6), new Cell(7,3,7), new Cell(7,4,7), new Cell(7,5,7), new Cell(7,6,8), new Cell(7,7,8), new Cell(7,8,8)},
+										{new Cell(8,0,6), new Cell(8,1,6), new Cell(8,2,6), new Cell(8,3,7), new Cell(8,4,7), new Cell(8,5,7), new Cell(8,6,8), new Cell(8,7,8), new Cell(8,8,8)}};
+	
+	//Create a second 2D array to represent the zones of the Sudoku board
+	//Populate zones by connecting each cell from field to its corresponding zone cell
+	//Zone layout:
+	//	0	1	2
+	//	3	4	5
+	//	6	7	8
+	private static Cell[][] zone = {{field[0][0], field[0][1], field[0][2], field[1][0], field[1][1], field[1][2], field[2][0], field[2][1], field[2][2]},
+									{field[0][3], field[0][4], field[0][5], field[1][3], field[1][4], field[1][5], field[2][3], field[2][4], field[2][5]},
+									{field[0][6], field[0][7], field[0][8], field[1][6], field[1][7], field[1][8], field[2][6], field[2][7], field[2][8]},
+									{field[3][0], field[3][1], field[3][2], field[4][0], field[4][1], field[4][2], field[5][0], field[5][1], field[5][2]},
+									{field[3][3], field[3][4], field[3][5], field[4][3], field[4][4], field[4][5], field[5][3], field[5][4], field[5][5]},
+									{field[3][6], field[3][7], field[3][8], field[4][6], field[4][7], field[4][8], field[5][6], field[5][7], field[5][8]},
+									{field[6][0], field[6][1], field[6][2], field[7][0], field[7][1], field[7][2], field[8][0], field[8][1], field[8][2]},
+									{field[6][3], field[6][4], field[6][5], field[7][3], field[7][4], field[7][5], field[8][3], field[8][4], field[8][5]},
+									{field[6][6], field[6][7], field[6][8], field[7][6], field[7][7], field[7][8], field[8][6], field[8][7], field[8][8]}};
 	
 	public static void main(String[] args) {
-		//Populate field with cells; make row and column values in cells correspond to row and column number
-		for (int i=0; i<9; i++) {
-			for (int j=0; j<9; j++) {
-				field[i][j] = new Cell(i,j);
-			}
-		}				
-		
-		//Create and populate zones by connecting each cell from field to its corresponding zone cell
-		//Zone layout:
-		//	0	1	2
-		//	3	4	5
-		//	6	7	8
-		Cell[][] zone = {{field[0][0], field[0][1], field[0][2],
-							field[1][0], field[1][1], field[1][2],
-							field[2][0], field[2][1], field[2][2]},
-						{field[0][3], field[0][4], field[0][5],
-							field[1][3], field[1][4], field[1][5],
-							field[2][3], field[2][4], field[2][5]},
-						{field[0][6], field[0][7], field[0][8],
-							field[1][6], field[1][7], field[1][8],
-							field[2][6], field[2][7], field[2][8]},
-						{field[3][0], field[3][1], field[3][2],
-							field[4][0], field[4][1], field[4][2],
-							field[5][0], field[5][1], field[5][2]},
-						{field[3][3], field[3][4], field[3][5],
-							field[4][3], field[4][4], field[4][5],
-							field[5][3], field[5][4], field[5][5]},
-						{field[3][6], field[3][7], field[3][8],
-							field[4][6], field[4][7], field[4][8],
-							field[5][6], field[5][7], field[5][8]},
-						{field[6][0], field[6][1], field[6][2],
-							field[7][0], field[7][1], field[7][2],
-							field[8][0], field[8][1], field[8][2]},
-						{field[6][3], field[6][4], field[6][5],
-							field[7][3], field[7][4], field[7][5],
-							field[8][3], field[8][4], field[8][5]},
-						{field[6][6], field[6][7], field[6][8],
-							field[7][6], field[7][7], field[7][8],
-							field[8][6], field[8][7], field[8][8]}};
-		
-		//Assign zone numbers to cells
-		for (int i=0; i<9; i++) {
-			zone[0][i].setZone(0);	zone[1][i].setZone(1);	zone[2][i].setZone(2);
-			zone[3][i].setZone(3);	zone[4][i].setZone(4);	zone[5][i].setZone(5);
-			zone[6][i].setZone(6);	zone[7][i].setZone(7);	zone[8][i].setZone(8);
-		}
 		
 		//Input Sudoku grid and fill the cells with their respective values
 		System.out.println("Enter your Sudoku grid. Use the number 0 to denote an empty cell.");
 		System.out.println("Separate lines with Enter and numbers with Space.");
 		Scanner scan = new Scanner(System.in);
 		for (int i=0; i<9; i++) {
-			for (int j=0; j<9; j++) {
+			for (Cell cell : field[i]) {
 				int temp = scan.nextInt();
 				if (temp!=0) {
-					field[i][j].setValue(temp);
-					field[i][j].setSolved(true);
+					cell.setValue(temp);
+					cell.setSolved(true);
 				}
 			}
 		}
 		scan.close();
 		
 		//Create a variable to check if the puzzle is still in progress
-		//While the puzzle is still unsolved, run through the solution process
+		//While the puzzle is still unsolved, run through solution process
 		boolean puzzleSolved = false;
 		while (!puzzleSolved) {
 			//Compute all possibilities for each cell
 			//For each zone
 			for (int i=0; i<9; i++) {
 				//For each cell in zone[i]
-				for (int j=0; j<9; j++) {
+				for (Cell cell : zone[i]) {
 					//If the cell is not solved
-					if (!zone[i][j].isSolved()) {
+					if (!cell.isSolved()) {
 						//Test the cell for each possible value 1-9
 						for (int k=1; k<=9; k++) {
 							//As long as the value is not already in a solved cell in the zone
@@ -94,9 +72,9 @@ public class TextSolver {
 									((zone[i][6].isSolved() && zone[i][6].getValue()!=k) || !(zone[i][6].isSolved())) &&
 									((zone[i][7].isSolved() && zone[i][7].getValue()!=k) || !(zone[i][7].isSolved())) &&
 									((zone[i][8].isSolved() && zone[i][8].getValue()!=k) || !(zone[i][8].isSolved()))) {
-								zone[i][j].setValue(k);
-								if (checkCell(zone[i][j])) {
-									zone[i][j].addPossible();
+								cell.setValue(k);
+								if (checkCell(cell)) {
+									cell.addPossible();
 								}
 							}
 						}
@@ -106,64 +84,8 @@ public class TextSolver {
 			
 			//Check for cells that only have one possibility and mark them solved
 			for (int i=0; i<9; i++) {
-				for (int j=0; j<9; j++) {
-					//If the cell is unsolved and only one possibility variable is true, solve cell using that value
-					if (!field[i][j].isSolved()) { 
-						if (field[i][j].isMaybe1() && !field[i][j].isMaybe2() && !field[i][j].isMaybe3() &&
-								!field[i][j].isMaybe4() && !field[i][j].isMaybe5() && !field[i][j].isMaybe6() &&
-								!field[i][j].isMaybe7() && !field[i][j].isMaybe8() && !field[i][j].isMaybe9()) {
-							field[i][j].setValue(1);
-							field[i][j].setSolved(true);
-						}
-						if (!field[i][j].isMaybe1() && field[i][j].isMaybe2() && !field[i][j].isMaybe3() &&
-								!field[i][j].isMaybe4() && !field[i][j].isMaybe5() && !field[i][j].isMaybe6() &&
-								!field[i][j].isMaybe7() && !field[i][j].isMaybe8() && !field[i][j].isMaybe9()) {
-							field[i][j].setValue(2);
-							field[i][j].setSolved(true);
-						}
-						if (!field[i][j].isMaybe1() && !field[i][j].isMaybe2() && field[i][j].isMaybe3() &&
-								!field[i][j].isMaybe4() && !field[i][j].isMaybe5() && !field[i][j].isMaybe6() &&
-								!field[i][j].isMaybe7() && !field[i][j].isMaybe8() && !field[i][j].isMaybe9()) {
-							field[i][j].setValue(3);
-							field[i][j].setSolved(true);
-						}
-						if (!field[i][j].isMaybe1() && !field[i][j].isMaybe2() && !field[i][j].isMaybe3() &&
-								field[i][j].isMaybe4() && !field[i][j].isMaybe5() && !field[i][j].isMaybe6() &&
-								!field[i][j].isMaybe7() && !field[i][j].isMaybe8() && !field[i][j].isMaybe9()) {
-							field[i][j].setValue(4);
-							field[i][j].setSolved(true);
-						}
-						if (!field[i][j].isMaybe1() && !field[i][j].isMaybe2() && !field[i][j].isMaybe3() &&
-								!field[i][j].isMaybe4() && field[i][j].isMaybe5() && !field[i][j].isMaybe6() &&
-								!field[i][j].isMaybe7() && !field[i][j].isMaybe8() && !field[i][j].isMaybe9()) {
-							field[i][j].setValue(5);
-							field[i][j].setSolved(true);
-						}
-						if (!field[i][j].isMaybe1() && !field[i][j].isMaybe2() && !field[i][j].isMaybe3() &&
-								!field[i][j].isMaybe4() && !field[i][j].isMaybe5() && field[i][j].isMaybe6() &&
-								!field[i][j].isMaybe7() && !field[i][j].isMaybe8() && !field[i][j].isMaybe9()) {
-							field[i][j].setValue(6);
-							field[i][j].setSolved(true);
-						}
-						if (!field[i][j].isMaybe1() && !field[i][j].isMaybe2() && !field[i][j].isMaybe3() &&
-								!field[i][j].isMaybe4() && !field[i][j].isMaybe5() && !field[i][j].isMaybe6() &&
-								field[i][j].isMaybe7() && !field[i][j].isMaybe8() && !field[i][j].isMaybe9()) {
-							field[i][j].setValue(7);
-							field[i][j].setSolved(true);
-						}
-						if (!field[i][j].isMaybe1() && !field[i][j].isMaybe2() && !field[i][j].isMaybe3() &&
-								!field[i][j].isMaybe4() && !field[i][j].isMaybe5() && !field[i][j].isMaybe6() &&
-								!field[i][j].isMaybe7() && field[i][j].isMaybe8() && !field[i][j].isMaybe9()) {
-							field[i][j].setValue(8);
-							field[i][j].setSolved(true);
-						}
-						if (!field[i][j].isMaybe1() && !field[i][j].isMaybe2() && !field[i][j].isMaybe3() &&
-								!field[i][j].isMaybe4() && !field[i][j].isMaybe5() && !field[i][j].isMaybe6() &&
-								!field[i][j].isMaybe7() && !field[i][j].isMaybe8() && field[i][j].isMaybe9()) {
-							field[i][j].setValue(9);
-							field[i][j].setSolved(true);
-						}
-					}
+				for (Cell cell : field[i]) {
+					cell.candidateCheck();
 				}
 			}
 			
@@ -176,17 +98,8 @@ public class TextSolver {
 				puzzleSolved = true;
 			} else {
 				for (int i=0; i<9; i++) {
-					for (int j=0; j<9; j++) {
-						field[i][j].setMaybe1(false);
-						field[i][j].setMaybe2(false);
-						field[i][j].setMaybe3(false);
-						field[i][j].setMaybe4(false);
-						field[i][j].setMaybe5(false);
-						field[i][j].setMaybe6(false);
-						field[i][j].setMaybe7(false);
-						field[i][j].setMaybe8(false);
-						field[i][j].setMaybe9(false);
-					}
+					for (Cell cell : field[i])
+						cell.resetPossible();
 				}
 			}
 		}
@@ -198,8 +111,8 @@ public class TextSolver {
 	//Helper method to print the puzzle
 	public static void print() {
 		for (int i=0; i<9; i++) {
-			for (int j=0; j<9; j++)
-				System.out.print(field[i][j].getValue() + " ");
+			for (Cell cell : field[i])
+				System.out.print(cell.getValue() + " ");
 			System.out.println("");
 		}
 	}
@@ -208,27 +121,27 @@ public class TextSolver {
 	//For testing purposes only
 	public static void printPossible() {
 		for (int i=0; i<9; i++) {
-			for (int j=0; j<9; j++) {
-				if (field[i][j].isSolved())
-					System.out.print(field[i][j].getValue() + "\t");
+			for (Cell cell : field[i]) {
+				if (cell.isSolved())
+					System.out.print(cell.getValue() + "\t");
 				else {
-					if (field[i][j].isMaybe1())
+					if (cell.isMaybe1())
 						System.out.print("1");
-					if (field[i][j].isMaybe2())
+					if (cell.isMaybe2())
 						System.out.print("2");
-					if (field[i][j].isMaybe3())
+					if (cell.isMaybe3())
 						System.out.print("3");
-					if (field[i][j].isMaybe4())
+					if (cell.isMaybe4())
 						System.out.print("4");
-					if (field[i][j].isMaybe5())
+					if (cell.isMaybe5())
 						System.out.print("5");
-					if (field[i][j].isMaybe6())
+					if (cell.isMaybe6())
 						System.out.print("6");
-					if (field[i][j].isMaybe7())
+					if (cell.isMaybe7())
 						System.out.print("7");
-					if (field[i][j].isMaybe8())
+					if (cell.isMaybe8())
 						System.out.print("8");
-					if (field[i][j].isMaybe9())
+					if (cell.isMaybe9())
 						System.out.print("9");
 					System.out.print("\t");
 				}
@@ -264,8 +177,8 @@ public class TextSolver {
 	//If any cell is unsolved, return false; otherwise return true
 	public static boolean checkPuzzle() {
 		for (int i=0; i<9; i++) {
-			for (int j=0; j<9; j++) {
-				if (!field[i][j].isSolved())
+			for (Cell cell : field[i]) {
+				if (!cell.isSolved())
 					return false;
 			}
 		}
@@ -275,7 +188,4 @@ public class TextSolver {
 }
 
 //Test puzzle
-// 0 8 5 3 2 4 9 6 7 0 4 6 1 8 7 5 2 3 0 7 3 9 5 6 1 8 4 0 2 4 6 1 3 7 5 9 0 1 9 5 7 8 3 4 2 0 5 7 4 9 2 8 1 6 0 3 2 7 4 1 6 9 8 0 9 8 2 6 5 4 3 1 0 6 1 8 3 9 2 7 5
-
-//Random test puzzle
 // 0 0 0 0 9 0 0 5 0 7 0 0 0 4 5 0 2 3 0 0 3 0 8 0 0 6 7 0 0 4 0 2 9 0 0 8 2 3 9 0 0 0 7 1 6 1 0 0 7 3 0 2 0 0 9 1 0 0 6 0 3 0 0 5 2 0 4 7 0 0 0 9 0 4 0 0 1 0 0 0 0
