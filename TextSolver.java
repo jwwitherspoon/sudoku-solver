@@ -50,37 +50,17 @@ public class TextSolver {
 		scan.close();
 		
 		//Create a variable to check if the puzzle is still in progress
-		//While the puzzle is still unsolved, run through solution process
 		boolean puzzleSolved = false;
-		while (!puzzleSolved) {
+		
+		//While the puzzle is still unsolved and no duplicates are produced, solve puzzle using markups and candidate checks
+		String before = "before", after = "after";
+		while (!puzzleSolved && !before.equals(after)) {
+			
 			//Compute all possibilities for each cell
-			//For each zone
-			for (int i=0; i<9; i++) {
-				//For each cell in zone[i]
-				for (Cell cell : zone[i]) {
-					//If the cell is not solved
-					if (!cell.isSolved()) {
-						//Test the cell for each possible value 1-9
-						for (int k=1; k<=9; k++) {
-							//As long as the value is not already in a solved cell in the zone
-							if (((zone[i][0].isSolved() && zone[i][0].getValue()!=k) || !(zone[i][0].isSolved())) &&
-									((zone[i][1].isSolved() && zone[i][1].getValue()!=k) || !(zone[i][1].isSolved())) &&
-									((zone[i][2].isSolved() && zone[i][2].getValue()!=k) || !(zone[i][2].isSolved())) &&
-									((zone[i][3].isSolved() && zone[i][3].getValue()!=k) || !(zone[i][3].isSolved())) &&
-									((zone[i][4].isSolved() && zone[i][4].getValue()!=k) || !(zone[i][4].isSolved())) &&
-									((zone[i][5].isSolved() && zone[i][5].getValue()!=k) || !(zone[i][5].isSolved())) &&
-									((zone[i][6].isSolved() && zone[i][6].getValue()!=k) || !(zone[i][6].isSolved())) &&
-									((zone[i][7].isSolved() && zone[i][7].getValue()!=k) || !(zone[i][7].isSolved())) &&
-									((zone[i][8].isSolved() && zone[i][8].getValue()!=k) || !(zone[i][8].isSolved()))) {
-								cell.setValue(k);
-								if (checkCell(cell)) {
-									cell.addPossible();
-								}
-							}
-						}
-					}
-				}
-			}
+			markup();
+			
+			//Create a string representation of the puzzle before candidate check
+			before = puzzleToString();
 			
 			//Check for cells that only have one possibility and mark them solved
 			for (int i=0; i<9; i++) {
@@ -89,8 +69,16 @@ public class TextSolver {
 				}
 			}
 			
-			//Print the possibilities for each cell after each iteration of the solution algorithm
-			printPossible();
+			//Create a string representation of the puzzle after candidate check
+			//Reset possibilities for all cells
+			for (int i=0; i<9; i++) {
+				for (Cell cell : field[i])
+					cell.resetPossible();
+			}
+			//Recompute all possibilities for each cell taking into account the newly solved cells (if any)
+			markup();
+			//Create a string representation of the puzzle
+			after = puzzleToString();
 
 			//Check to see if the entire puzzle is solved
 			//If yes, break while loop; if no, reset possibilities for all cells
@@ -102,10 +90,14 @@ public class TextSolver {
 						cell.resetPossible();
 				}
 			}
+			
 		}
 
-		//Print the solved puzzle
-		print();
+		//Print the solved puzzle or a message
+		if (puzzleSolved)
+			print();
+		else
+			System.out.println("The puzzle cannot be solved using only candidate checks.");
 	}
 	
 	//Helper method to print the puzzle
@@ -151,6 +143,52 @@ public class TextSolver {
 		System.out.println("");
 	}
 	
+	//Helper method to compute all possibilities for each cell
+	public static void markup() {
+		//For each zone
+		for (int i=0; i<9; i++) {
+			//For each cell in zone[i]
+			for (Cell cell : zone[i]) {
+				//If the cell is not solved
+				if (!cell.isSolved()) {
+					//Test the cell for each possible value 1-9
+					for (int k=1; k<=9; k++) {
+						//As long as the value is not already in a solved cell in the zone
+						if (((zone[i][0].isSolved() && zone[i][0].getValue()!=k) || !(zone[i][0].isSolved())) &&
+								((zone[i][1].isSolved() && zone[i][1].getValue()!=k) || !(zone[i][1].isSolved())) &&
+								((zone[i][2].isSolved() && zone[i][2].getValue()!=k) || !(zone[i][2].isSolved())) &&
+								((zone[i][3].isSolved() && zone[i][3].getValue()!=k) || !(zone[i][3].isSolved())) &&
+								((zone[i][4].isSolved() && zone[i][4].getValue()!=k) || !(zone[i][4].isSolved())) &&
+								((zone[i][5].isSolved() && zone[i][5].getValue()!=k) || !(zone[i][5].isSolved())) &&
+								((zone[i][6].isSolved() && zone[i][6].getValue()!=k) || !(zone[i][6].isSolved())) &&
+								((zone[i][7].isSolved() && zone[i][7].getValue()!=k) || !(zone[i][7].isSolved())) &&
+								((zone[i][8].isSolved() && zone[i][8].getValue()!=k) || !(zone[i][8].isSolved()))) {
+							cell.setValue(k);
+							if (checkCell(cell)) {
+								cell.addPossible();
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	//Helper method to find instances where a number can only go in one cell in a zone
+	public static void zonePlaceFind() {
+		
+	}
+	
+	//Helper method to find instances where a number can only go in one cell in a row
+	public static void rowPlaceFind() {
+		
+	}
+	
+	//Helper method to find instances where a number can only go in one cell in a column
+	public static void columnPlaceFind() {
+		
+	}
+	
 	//Helper method to check to see if the value of a cell can work for that cell
 	public static boolean checkCell(Cell cell) {
 		//Create variables to represent the row and column the cell will be checked against
@@ -185,7 +223,41 @@ public class TextSolver {
 		return true;
 	}
 	
+	//Helper method to return a String representation of the puzzle
+	//Used for duplicate checks
+		public static String puzzleToString() {
+			String puzzle = "";
+			for (int i=0; i<9; i++) {
+				for (int j=0; j<9; j++) {
+					if (field[i][j].isSolved())
+						puzzle = puzzle.concat(field[i][j].getValue() + " ");
+					else {
+						if (field[i][j].isMaybe1())
+							puzzle = puzzle.concat("1");
+						if (field[i][j].isMaybe2())
+							puzzle = puzzle.concat("2");
+						if (field[i][j].isMaybe3())
+							puzzle = puzzle.concat("3");
+						if (field[i][j].isMaybe4())
+							puzzle = puzzle.concat("4");
+						if (field[i][j].isMaybe5())
+							puzzle = puzzle.concat("5");
+						if (field[i][j].isMaybe6())
+							puzzle = puzzle.concat("6");
+						if (field[i][j].isMaybe7())
+							puzzle = puzzle.concat("7");
+						if (field[i][j].isMaybe8())
+							puzzle = puzzle.concat("8");
+						if (field[i][j].isMaybe9())
+							puzzle = puzzle.concat("9");
+						puzzle = puzzle.concat(" ");
+					}
+				}
+			}
+			return puzzle;
+		}
+	
 }
 
-//Test puzzle
+//Random test puzzle
 // 0 0 0 0 9 0 0 5 0 7 0 0 0 4 5 0 2 3 0 0 3 0 8 0 0 6 7 0 0 4 0 2 9 0 0 8 2 3 9 0 0 0 7 1 6 1 0 0 7 3 0 2 0 0 9 1 0 0 6 0 3 0 0 5 2 0 4 7 0 0 0 9 0 4 0 0 1 0 0 0 0
