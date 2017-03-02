@@ -92,6 +92,8 @@ public class TextSolver {
 			}
 			
 		}
+		
+		//TODO Add place-finding algorithm
 
 		//Print the solved puzzle or a message
 		if (puzzleSolved)
@@ -117,23 +119,23 @@ public class TextSolver {
 				if (cell.isSolved())
 					System.out.print(cell.getValue() + "\t");
 				else {
-					if (cell.isMaybe1())
+					if (cell.isPossible(1))
 						System.out.print("1");
-					if (cell.isMaybe2())
+					if (cell.isPossible(2))
 						System.out.print("2");
-					if (cell.isMaybe3())
+					if (cell.isPossible(3))
 						System.out.print("3");
-					if (cell.isMaybe4())
+					if (cell.isPossible(4))
 						System.out.print("4");
-					if (cell.isMaybe5())
+					if (cell.isPossible(5))
 						System.out.print("5");
-					if (cell.isMaybe6())
+					if (cell.isPossible(6))
 						System.out.print("6");
-					if (cell.isMaybe7())
+					if (cell.isPossible(7))
 						System.out.print("7");
-					if (cell.isMaybe8())
+					if (cell.isPossible(8))
 						System.out.print("8");
-					if (cell.isMaybe9())
+					if (cell.isPossible(9))
 						System.out.print("9");
 					System.out.print("\t");
 				}
@@ -165,8 +167,9 @@ public class TextSolver {
 								((zone[i][8].isSolved() && zone[i][8].getValue()!=k) || !(zone[i][8].isSolved()))) {
 							cell.setValue(k);
 							if (checkCell(cell)) {
-								cell.addPossible();
+								cell.setPossible(k);
 							}
+							cell.setValue(0);
 						}
 					}
 				}
@@ -176,7 +179,57 @@ public class TextSolver {
 	
 	//Helper method to find instances where a number can only go in one cell in a zone
 	public static void zonePlaceFind() {
-		
+		//For each number
+		for (int i=0; i<9; i++) {
+			//For each zone
+			for (Cell[] cells : zone) {
+				//If the number can only fit in cell 0, solve cell 0 using the number
+				if (cells[0].isPossible(i) && !cells[1].isPossible(i) && !cells[2].isPossible(i) && !cells[3].isPossible(i) && !cells[4].isPossible(i) && !cells[5].isPossible(i) && !cells[6].isPossible(i) && !cells[7].isPossible(i) && !cells[8].isPossible(i)) {
+					cells[0].setValue(i);
+					cells[0].setSolved(true);
+				}
+				//If the number can only fit in cell 1, solve cell 1 using the number
+				if (!cells[0].isPossible(i) && cells[1].isPossible(i) && !cells[2].isPossible(i) && !cells[3].isPossible(i) && !cells[4].isPossible(i) && !cells[5].isPossible(i) && !cells[6].isPossible(i) && !cells[7].isPossible(i) && !cells[8].isPossible(i)) {
+					cells[1].setValue(i);
+					cells[1].setSolved(true);
+				}
+				//If the number can only fit in cell 2, solve cell 2 using the number
+				if (!cells[0].isPossible(i) && !cells[1].isPossible(i) && cells[2].isPossible(i) && !cells[3].isPossible(i) && !cells[4].isPossible(i) && !cells[5].isPossible(i) && !cells[6].isPossible(i) && !cells[7].isPossible(i) && !cells[8].isPossible(i)) {
+					cells[2].setValue(i);
+					cells[2].setSolved(true);
+				}
+				//If the number can only fit in cell 3, solve cell 3 using the number
+				if (!cells[0].isPossible(i) && !cells[1].isPossible(i) && !cells[2].isPossible(i) && cells[3].isPossible(i) && !cells[4].isPossible(i) && !cells[5].isPossible(i) && !cells[6].isPossible(i) && !cells[7].isPossible(i) && !cells[8].isPossible(i)) {
+					cells[3].setValue(i);
+					cells[3].setSolved(true);
+				}
+				//If the number can only fit in cell 4, solve cell 4 using the number
+				if (!cells[0].isPossible(i) && !cells[1].isPossible(i) && !cells[2].isPossible(i) && !cells[3].isPossible(i) && cells[4].isPossible(i) && !cells[5].isPossible(i) && !cells[6].isPossible(i) && !cells[7].isPossible(i) && !cells[8].isPossible(i)) {
+					cells[4].setValue(i);
+					cells[4].setSolved(true);
+				}
+				//If the number can only fit in cell 5, solve cell 5 using the number
+				if (!cells[0].isPossible(i) && !cells[1].isPossible(i) && !cells[2].isPossible(i) && !cells[3].isPossible(i) && !cells[4].isPossible(i) && cells[5].isPossible(i) && !cells[6].isPossible(i) && !cells[7].isPossible(i) && !cells[8].isPossible(i)) {
+					cells[5].setValue(i);
+					cells[5].setSolved(true);
+				}
+				//If the number can only fit in cell 6, solve cell 6 using the number
+				if (!cells[0].isPossible(i) && !cells[1].isPossible(i) && !cells[2].isPossible(i) && !cells[3].isPossible(i) && !cells[4].isPossible(i) && !cells[5].isPossible(i) && cells[6].isPossible(i) && !cells[7].isPossible(i) && !cells[8].isPossible(i)) {
+					cells[6].setValue(i);
+					cells[6].setSolved(true);
+				}
+				//If the number can only fit in cell 7, solve cell 7 using the number
+				if (!cells[0].isPossible(i) && !cells[1].isPossible(i) && !cells[2].isPossible(i) && !cells[3].isPossible(i) && !cells[4].isPossible(i) && !cells[5].isPossible(i) && !cells[6].isPossible(i) && cells[7].isPossible(i) && !cells[8].isPossible(i)) {
+					cells[7].setValue(i);
+					cells[7].setSolved(true);
+				}
+				//If the number can only fit in cell 8, solve cell 8 using the number
+				if (!cells[0].isPossible(i) && !cells[1].isPossible(i) && !cells[2].isPossible(i) && !cells[3].isPossible(i) && !cells[4].isPossible(i) && !cells[5].isPossible(i) && !cells[6].isPossible(i) && !cells[7].isPossible(i) && cells[8].isPossible(i)) {
+					cells[8].setValue(i);
+					cells[8].setSolved(true);
+				}
+			}
+		}
 	}
 	
 	//Helper method to find instances where a number can only go in one cell in a row
@@ -228,27 +281,27 @@ public class TextSolver {
 		public static String puzzleToString() {
 			String puzzle = "";
 			for (int i=0; i<9; i++) {
-				for (int j=0; j<9; j++) {
-					if (field[i][j].isSolved())
-						puzzle = puzzle.concat(field[i][j].getValue() + " ");
+				for (Cell cell : field[i]) {
+					if (cell.isSolved())
+						puzzle = puzzle.concat(cell.getValue() + " ");
 					else {
-						if (field[i][j].isMaybe1())
+						if (cell.isPossible(1))
 							puzzle = puzzle.concat("1");
-						if (field[i][j].isMaybe2())
+						if (cell.isPossible(2))
 							puzzle = puzzle.concat("2");
-						if (field[i][j].isMaybe3())
+						if (cell.isPossible(3))
 							puzzle = puzzle.concat("3");
-						if (field[i][j].isMaybe4())
+						if (cell.isPossible(4))
 							puzzle = puzzle.concat("4");
-						if (field[i][j].isMaybe5())
+						if (cell.isPossible(5))
 							puzzle = puzzle.concat("5");
-						if (field[i][j].isMaybe6())
+						if (cell.isPossible(6))
 							puzzle = puzzle.concat("6");
-						if (field[i][j].isMaybe7())
+						if (cell.isPossible(7))
 							puzzle = puzzle.concat("7");
-						if (field[i][j].isMaybe8())
+						if (cell.isPossible(8))
 							puzzle = puzzle.concat("8");
-						if (field[i][j].isMaybe9())
+						if (cell.isPossible(9))
 							puzzle = puzzle.concat("9");
 						puzzle = puzzle.concat(" ");
 					}
