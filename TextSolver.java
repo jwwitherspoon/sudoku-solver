@@ -52,45 +52,148 @@ public class TextSolver {
 		//Create a variable to check if the puzzle is still in progress
 		boolean puzzleSolved = false;
 		
-		//While the puzzle is still unsolved and no duplicates are produced, solve puzzle using markups and candidate checks
-		String before = "before", after = "after";
-		while (!puzzleSolved && !before.equals(after)) {
-			
-			//Compute all possibilities for each cell
-			markup();
-			
-			//Create a string representation of the puzzle before candidate check
-			before = puzzleToString();
-			
-			//Check for cells that only have one possibility and mark them solved
-			for (int i=0; i<9; i++) {
-				for (Cell cell : field[i]) {
-					cell.candidateCheck();
-				}
-			}
-			
-			//Create a string representation of the puzzle after candidate check
-			//Reset possibilities for all cells
-			for (int i=0; i<9; i++) {
-				for (Cell cell : field[i])
-					cell.resetPossible();
-			}
-			//Recompute all possibilities for each cell taking into account the newly solved cells (if any)
-			markup();
-			//Create a string representation of the puzzle
-			after = puzzleToString();
+		//While the puzzle is still unsolved, run the solution algorithm
+		while (!puzzleSolved) {
+			//While the puzzle is still unsolved and no duplicates are produced, solve puzzle using markups and candidate checks
+			String before = "before", after = "after";
+			while (!puzzleSolved && !before.equals(after)) {
+				//Compute all possibilities for each cell
+				markup();
 
-			//Check to see if the entire puzzle is solved
-			//If yes, break while loop; if no, reset possibilities for all cells
-			if (checkPuzzle()) {
-				puzzleSolved = true;
-			} else {
+				//Create a string representation of the puzzle before candidate check
+				before = puzzleToString();
+
+				//Check for cells that only have one possibility and mark them solved
+				for (int i=0; i<9; i++) {
+					for (Cell cell : field[i]) {
+						cell.candidateCheck();
+					}
+				}
+
+				//Create a string representation of the puzzle after candidate check
+				//Reset possibilities for all cells
 				for (int i=0; i<9; i++) {
 					for (Cell cell : field[i])
 						cell.resetPossible();
 				}
+				//Recompute all possibilities for each cell taking into account the newly solved cells (if any)
+				markup();
+				//Create a string representation of the puzzle
+				after = puzzleToString();
+
+				//Check to see if the entire puzzle is solved
+				//If yes, break while loop; if no, reset possibilities for all cells
+				if (checkPuzzle()) {
+					puzzleSolved = true;
+				} else {
+					for (int i=0; i<9; i++) {
+						for (Cell cell : field[i])
+							cell.resetPossible();
+					}
+				}
 			}
 			
+			//While the puzzle is still unsolved and no duplicates are produced, solve puzzle using markups and zone place finding
+			while (!puzzleSolved && !before.equals(after)) {
+				//Compute all possibilities for each cell
+				markup();
+
+				//Create a string representation of the puzzle before place finding
+				before = puzzleToString();
+				
+				//Check for instances where a number can only fit in one cell in a zone and mark them solved
+				zonePlaceFind();
+				
+				//Create a string representation of the puzzle after place finding
+				//Reset possibilities for all cells
+				for (int i=0; i<9; i++) {
+					for (Cell cell : field[i])
+						cell.resetPossible();
+				}
+				//Recompute all possibilities for each cell taking into account the newly solved cells (if any)
+				markup();
+				//Create a string representation of the puzzle
+				after = puzzleToString();
+				
+				//Check to see if the entire puzzle is solved
+				//If yes, break while loop; if no, reset possibilities for all cells
+				if (checkPuzzle()) {
+					puzzleSolved = true;
+				} else {
+					for (int i=0; i<9; i++) {
+						for (Cell cell : field[i])
+							cell.resetPossible();
+					}
+				}
+			}
+			
+			//While the puzzle is still unsolved and no duplicates are produced, solve puzzle using markups and row place finding
+			while (!puzzleSolved && !before.equals(after)) {
+				//Compute all possibilities for each cell
+				markup();
+
+				//Create a string representation of the puzzle before place finding
+				before = puzzleToString();
+				
+				//Check for instances where a number can only fit in one cell in a zone and mark them solved
+				rowPlaceFind();
+				
+				//Create a string representation of the puzzle after place finding
+				//Reset possibilities for all cells
+				for (int i=0; i<9; i++) {
+					for (Cell cell : field[i])
+						cell.resetPossible();
+				}
+				//Recompute all possibilities for each cell taking into account the newly solved cells (if any)
+				markup();
+				//Create a string representation of the puzzle
+				after = puzzleToString();
+				
+				//Check to see if the entire puzzle is solved
+				//If yes, break while loop; if no, reset possibilities for all cells
+				if (checkPuzzle()) {
+					puzzleSolved = true;
+				} else {
+					for (int i=0; i<9; i++) {
+						for (Cell cell : field[i])
+							cell.resetPossible();
+					}
+				}
+			}
+			
+			//While the puzzle is still unsolved and no duplicates are produced, solve puzzle using markups and column place finding
+			while (!puzzleSolved && !before.equals(after)) {
+				//Compute all possibilities for each cell
+				markup();
+
+				//Create a string representation of the puzzle before place finding
+				before = puzzleToString();
+				
+				//Check for instances where a number can only fit in one cell in a zone and mark them solved
+				columnPlaceFind();
+				
+				//Create a string representation of the puzzle after place finding
+				//Reset possibilities for all cells
+				for (int i=0; i<9; i++) {
+					for (Cell cell : field[i])
+						cell.resetPossible();
+				}
+				//Recompute all possibilities for each cell taking into account the newly solved cells (if any)
+				markup();
+				//Create a string representation of the puzzle
+				after = puzzleToString();
+				
+				//Check to see if the entire puzzle is solved
+				//If yes, break while loop; if no, reset possibilities for all cells
+				if (checkPuzzle()) {
+					puzzleSolved = true;
+				} else {
+					for (int i=0; i<9; i++) {
+						for (Cell cell : field[i])
+							cell.resetPossible();
+					}
+				}
+			}
 		}
 		
 		//TODO Add place-finding algorithm
