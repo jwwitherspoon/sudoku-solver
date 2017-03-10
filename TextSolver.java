@@ -234,12 +234,112 @@ public class TextSolver {
 	
 	//Helper method to find instances where a number can only go in one cell in a row
 	public static void rowPlaceFind() {
-		
+		//For each number
+		for (int i=0; i<9; i++) {
+			//For each row
+			for (Cell[] cells : field) {
+				//If the number can only fit in cell 0, solve cell 0 using the number
+				if (cells[0].isPossible(i) && !cells[1].isPossible(i) && !cells[2].isPossible(i) && !cells[3].isPossible(i) && !cells[4].isPossible(i) && !cells[5].isPossible(i) && !cells[6].isPossible(i) && !cells[7].isPossible(i) && !cells[8].isPossible(i)) {
+					cells[0].setValue(i);
+					cells[0].setSolved(true);
+				}
+				//If the number can only fit in cell 1, solve cell 1 using the number
+				if (!cells[0].isPossible(i) && cells[1].isPossible(i) && !cells[2].isPossible(i) && !cells[3].isPossible(i) && !cells[4].isPossible(i) && !cells[5].isPossible(i) && !cells[6].isPossible(i) && !cells[7].isPossible(i) && !cells[8].isPossible(i)) {
+					cells[1].setValue(i);
+					cells[1].setSolved(true);
+				}
+				//If the number can only fit in cell 2, solve cell 2 using the number
+				if (!cells[0].isPossible(i) && !cells[1].isPossible(i) && cells[2].isPossible(i) && !cells[3].isPossible(i) && !cells[4].isPossible(i) && !cells[5].isPossible(i) && !cells[6].isPossible(i) && !cells[7].isPossible(i) && !cells[8].isPossible(i)) {
+					cells[2].setValue(i);
+					cells[2].setSolved(true);
+				}
+				//If the number can only fit in cell 3, solve cell 3 using the number
+				if (!cells[0].isPossible(i) && !cells[1].isPossible(i) && !cells[2].isPossible(i) && cells[3].isPossible(i) && !cells[4].isPossible(i) && !cells[5].isPossible(i) && !cells[6].isPossible(i) && !cells[7].isPossible(i) && !cells[8].isPossible(i)) {
+					cells[3].setValue(i);
+					cells[3].setSolved(true);
+				}
+				//If the number can only fit in cell 4, solve cell 4 using the number
+				if (!cells[0].isPossible(i) && !cells[1].isPossible(i) && !cells[2].isPossible(i) && !cells[3].isPossible(i) && cells[4].isPossible(i) && !cells[5].isPossible(i) && !cells[6].isPossible(i) && !cells[7].isPossible(i) && !cells[8].isPossible(i)) {
+					cells[4].setValue(i);
+					cells[4].setSolved(true);
+				}
+				//If the number can only fit in cell 5, solve cell 5 using the number
+				if (!cells[0].isPossible(i) && !cells[1].isPossible(i) && !cells[2].isPossible(i) && !cells[3].isPossible(i) && !cells[4].isPossible(i) && cells[5].isPossible(i) && !cells[6].isPossible(i) && !cells[7].isPossible(i) && !cells[8].isPossible(i)) {
+					cells[5].setValue(i);
+					cells[5].setSolved(true);
+				}
+				//If the number can only fit in cell 6, solve cell 6 using the number
+				if (!cells[0].isPossible(i) && !cells[1].isPossible(i) && !cells[2].isPossible(i) && !cells[3].isPossible(i) && !cells[4].isPossible(i) && !cells[5].isPossible(i) && cells[6].isPossible(i) && !cells[7].isPossible(i) && !cells[8].isPossible(i)) {
+					cells[6].setValue(i);
+					cells[6].setSolved(true);
+				}
+				//If the number can only fit in cell 7, solve cell 7 using the number
+				if (!cells[0].isPossible(i) && !cells[1].isPossible(i) && !cells[2].isPossible(i) && !cells[3].isPossible(i) && !cells[4].isPossible(i) && !cells[5].isPossible(i) && !cells[6].isPossible(i) && cells[7].isPossible(i) && !cells[8].isPossible(i)) {
+					cells[7].setValue(i);
+					cells[7].setSolved(true);
+				}
+				//If the number can only fit in cell 8, solve cell 8 using the number
+				if (!cells[0].isPossible(i) && !cells[1].isPossible(i) && !cells[2].isPossible(i) && !cells[3].isPossible(i) && !cells[4].isPossible(i) && !cells[5].isPossible(i) && !cells[6].isPossible(i) && !cells[7].isPossible(i) && cells[8].isPossible(i)) {
+					cells[8].setValue(i);
+					cells[8].setSolved(true);
+				}
+			}
+		}
 	}
 	
 	//Helper method to find instances where a number can only go in one cell in a column
 	public static void columnPlaceFind() {
-		
+		//For each number
+		for (int i=0; i<9; i++) {
+			//For each column
+			for (int j=0; j<9; j++) {
+				//If the number can only fit in cell 0, solve cell 0 using the number
+				if (field[0][j].isPossible(i) && !field[1][j].isPossible(i) && !field[2][j].isPossible(i) && !field[3][j].isPossible(i) && !field[4][j].isPossible(i) && !field[5][j].isPossible(i) && !field[6][j].isPossible(i) && !field[7][j].isPossible(i) && !field[8][j].isPossible(i)) {
+					field[0][j].setValue(i);
+					field[0][j].setSolved(true);
+				}
+				//If the number can only fit in cell 1, solve cell 1 using the number
+				if (!field[0][j].isPossible(i) && field[1][j].isPossible(i) && !field[2][j].isPossible(i) && !field[3][j].isPossible(i) && !field[4][j].isPossible(i) && !field[5][j].isPossible(i) && !field[6][j].isPossible(i) && !field[7][j].isPossible(i) && !field[8][j].isPossible(i)) {
+					field[1][j].setValue(i);
+					field[1][j].setSolved(true);
+				}
+				//If the number can only fit in cell 2, solve cell 2 using the number
+				if (!field[0][j].isPossible(i) && !field[1][j].isPossible(i) && field[2][j].isPossible(i) && !field[3][j].isPossible(i) && !field[4][j].isPossible(i) && !field[5][j].isPossible(i) && !field[6][j].isPossible(i) && !field[7][j].isPossible(i) && !field[8][j].isPossible(i)) {
+					field[2][j].setValue(i);
+					field[2][j].setSolved(true);
+				}
+				//If the number can only fit in cell 3, solve cell 3 using the number
+				if (!field[0][j].isPossible(i) && !field[1][j].isPossible(i) && !field[2][j].isPossible(i) && field[3][j].isPossible(i) && !field[4][j].isPossible(i) && !field[5][j].isPossible(i) && !field[6][j].isPossible(i) && !field[7][j].isPossible(i) && !field[8][j].isPossible(i)) {
+					field[3][j].setValue(i);
+					field[3][j].setSolved(true);
+				}
+				//If the number can only fit in cell 4, solve cell 4 using the number
+				if (!field[0][j].isPossible(i) && !field[1][j].isPossible(i) && !field[2][j].isPossible(i) && !field[3][j].isPossible(i) && field[4][j].isPossible(i) && !field[5][j].isPossible(i) && !field[6][j].isPossible(i) && !field[7][j].isPossible(i) && !field[8][j].isPossible(i)) {
+					field[4][j].setValue(i);
+					field[4][j].setSolved(true);
+				}
+				//If the number can only fit in cell 5, solve cell 5 using the number
+				if (!field[0][j].isPossible(i) && !field[1][j].isPossible(i) && !field[2][j].isPossible(i) && !field[3][j].isPossible(i) && !field[4][j].isPossible(i) && field[5][j].isPossible(i) && !field[6][j].isPossible(i) && !field[7][j].isPossible(i) && !field[8][j].isPossible(i)) {
+					field[5][j].setValue(i);
+					field[5][j].setSolved(true);
+				}
+				//If the number can only fit in cell 6, solve cell 6 using the number
+				if (!field[0][j].isPossible(i) && !field[1][j].isPossible(i) && !field[2][j].isPossible(i) && !field[3][j].isPossible(i) && !field[4][j].isPossible(i) && !field[5][j].isPossible(i) && field[6][j].isPossible(i) && !field[7][j].isPossible(i) && !field[8][j].isPossible(i)) {
+					field[6][j].setValue(i);
+					field[6][j].setSolved(true);
+				}
+				//If the number can only fit in cell 7, solve cell 7 using the number
+				if (!field[0][j].isPossible(i) && !field[1][j].isPossible(i) && !field[2][j].isPossible(i) && !field[3][j].isPossible(i) && !field[4][j].isPossible(i) && !field[5][j].isPossible(i) && !field[6][j].isPossible(i) && field[7][j].isPossible(i) && !field[8][j].isPossible(i)) {
+					field[7][j].setValue(i);
+					field[7][j].setSolved(true);
+				}
+				//If the number can only fit in cell 8, solve cell 8 using the number
+				if (!field[0][j].isPossible(i) && !field[1][j].isPossible(i) && !field[2][j].isPossible(i) && !field[3][j].isPossible(i) && !field[4][j].isPossible(i) && !field[5][j].isPossible(i) && !field[6][j].isPossible(i) && !field[7][j].isPossible(i) && field[8][j].isPossible(i)) {
+					field[8][j].setValue(i);
+					field[8][j].setSolved(true);
+				}
+			}
+		}
 	}
 	
 	//Helper method to check to see if the value of a cell can work for that cell
