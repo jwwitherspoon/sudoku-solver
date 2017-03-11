@@ -52,11 +52,11 @@ public class SimpleSolver {
 		scan.close();
 		
 		//Create enumeration of puzzle from left to right, top to bottom
-		Cell[] enum = new Cell[81];
+		Cell[] enumeration = new Cell[81];
 		int j=0;
 		for (int i=0; i<9; i++) {
 			for (Cell cell : field[i]) {
-				enum[j] = cell;
+				enumeration[j] = cell;
 				j++;
 			}
 		}
@@ -67,19 +67,19 @@ public class SimpleSolver {
 		//While the puzzle is not solved and has not been proven impossible, run the solution algorithm
 		while (!puzzleSolved && !impossible) {
 			//Determine the current cell
-			Cell current = enum[currentnum];
+			Cell current = enumeration[currentnum];
 			//Create two ints, one to store the current value and one to store the possible new value (starting with the next untested value)
-			int new = current.getValue()+1, prev = current.getValue();
+			int x = current.getValue()+1, prev = current.getValue();
 			//If the current cell is not solved, try adding numbers into the cell until the entry does not violate the Sudoku condition or all values have been tested
-			while (!current.isSolved() && new<=9 && current.getValue()==prev) {
-				if (checkCell(current, new)) {
-					current.setValue(new);
+			while (!current.isSolved() && x<=9 && current.getValue()==prev) {
+				if (checkCell(current, x)) {
+					current.setValue(x);
 					current.setSolved(true);
 				}
-				new++;
+				x++;
 			}
 			//If the value does not violate the Sudoku condition
-			if (current.isSolved) {
+			if (current.isSolved()) {
 				//If current cell is last cell, puzzle is solved
 				if (currentnum==80)
 					puzzleSolved = true;
@@ -101,7 +101,10 @@ public class SimpleSolver {
 		}
 		
 		//Print the solved puzzle
-		print();
+		if (puzzleSolved)
+			print();
+		else
+			System.out.println("This puzzle cannot be solved.");
 	}
 	
 	//Helper method to print the puzzle
