@@ -7,8 +7,9 @@ public class Cell {
 	//All cells start with a default of unsolved; setSolved() can change this
 	private int zone, row, column;
 	private int value = 0;
-	private boolean[] possible = new boolean[9];
 	private boolean solved = false;
+	private boolean[] possible = new boolean[9]; //possible[] is only used by CrookSolver
+	private boolean tempSolved = false; //tempSolved is only used by SimpleSolver
 	
 	//Row, column, and zone can only be set by the constructor at the moment of instantiation
 	public Cell(int row, int column, int zone) {
@@ -38,6 +39,12 @@ public class Cell {
 	}
 	public void setSolved(boolean solved) {
 		this.solved = solved;
+	}
+	public boolean isTempSolved() {
+		return tempSolved;
+	}
+	public void setTempSolved(boolean tempSolved) {
+		this.tempSolved = tempSolved;
 	}
 	public boolean isPossible(int i) {
 		return possible[i-1];
