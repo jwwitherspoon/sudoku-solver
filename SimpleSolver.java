@@ -1,3 +1,11 @@
+/**
+ * This is a sudoku solver based on the simple solving algorithm from this link:
+ * http://www.math.cornell.edu/~mec/Summer2009/meerkamp/Site/Solving_any_Sudoku_I.html
+ * This solver is built for readability, not efficiency.
+ * 
+ * @author Joel Witherspoon
+ */
+
 import java.util.Scanner;
 
 public class SimpleSolver {
@@ -29,8 +37,6 @@ public class SimpleSolver {
 									{field[6][0], field[6][1], field[6][2], field[7][0], field[7][1], field[7][2], field[8][0], field[8][1], field[8][2]},
 									{field[6][3], field[6][4], field[6][5], field[7][3], field[7][4], field[7][5], field[8][3], field[8][4], field[8][5]},
 									{field[6][6], field[6][7], field[6][8], field[7][6], field[7][7], field[7][8], field[8][6], field[8][7], field[8][8]}};
-	
-	private static boolean puzzleSolved = false, impossible = false;
 		
 	public static void main(String[] args) {
 		
@@ -62,41 +68,64 @@ public class SimpleSolver {
 		}
 		
 		//Solve puzzle using simple solving method
-		//Number used to denote which index of enum should be used as the current cell
+		//Number used to denote which index of enumeration should be used as the current cell
 		int currentnum = 0;
 		//While the puzzle is not solved and has not been proven impossible, run the solution algorithm
+		boolean puzzleSolved = false, impossible = false;
 		while (!puzzleSolved && !impossible) {
 			//Determine the current cell
 			Cell current = enumeration[currentnum];
-			//Create two ints, one to store the current value and one to store the possible new value (starting with the next untested value)
-			int x = current.getValue()+1, prev = current.getValue();
-			//If the current cell is not solved, try adding numbers into the cell until the entry does not violate the Sudoku condition or all values have been tested
-			while (!current.isSolved() && x<=9 && current.getValue()==prev) {
-				if (checkCell(current, x)) {
-					current.setValue(x);
-					current.setSolved(true);
+			//If cell is not already solved
+			if (!current.isSolved()) {
+				//Create two ints, one to store the current value and one to store the possible new value (starting with the next untested value)
+				int x = current.getValue()+1, prev = current.getValue();
+				//If the current cell is not tempsolved, try adding numbers into the cell until the entry does not violate the Sudoku condition or all values have been tested
+				while (!current.isTempSolved() && x<=9 && current.getValue()==prev) {
+					if (checkCell(current, x)) {
+						current.setValue(x);
+						current.setTempSolved(true);
+					}
+					x++;
 				}
-				x++;
+
+				//If the value does not violate the Sudoku condition
+				if (current.isTempSolved()) {
+					//If current cell is last cell, puzzle is solved
+					if (currentnum==80)
+						puzzleSolved = true;
+					//If current cell is not last cell, continue solution with next cell as new current cell
+					else
+						currentnum++;
+				}
+				//If all values violate the Sudoku condition
+				else {
+					//If current cell is first cell, puzzle has no solution
+					if (currentnum==0)
+						impossible = true;
+					//If current cell is not first cell, erase value of current cell and continue solution with previous unsolved cell as new current cell
+					else {
+						current.setValue(0);
+						//Continue decrementing currentnum until the current cell is not solved
+						//If there are no more unsolved cells, the puzzle is impossible
+						try {
+							do
+								currentnum--;
+							while (enumeration[currentnum].isSolved());
+							enumeration[currentnum].setTempSolved(false);
+						} catch (ArrayIndexOutOfBoundsException e) {
+							impossible = true;
+						}
+					}
+				}
 			}
-			//If the value does not violate the Sudoku condition
-			if (current.isSolved()) {
+			//If the cell is already solved
+			else {
 				//If current cell is last cell, puzzle is solved
 				if (currentnum==80)
 					puzzleSolved = true;
 				//If current cell is not last cell, continue solution with next cell as new current cell
 				else
 					currentnum++;
-			}
-			//If all values violate the Sudoku condition
-			else {
-				//If current cell is first cell, puzzle has no solution
-				if (currentnum==0)
-					impossible = true;
-				//If current cell is not first cell, erase value of current cell and continue solution with previous cell as new current cell
-				else {
-					current.setValue(0);
-					currentnum--;
-				}
 			}
 		}
 		
@@ -125,19 +154,19 @@ public class SimpleSolver {
 		
 		//Check value against values of the other row members
 		for (Cell current : field[r]) {
-			if (current.isSolved() && current.getValue()==value)
+			if ((current.isSolved() || current.isTempSolved()) && current.getValue()==value)
 				return false;
 		}
 		
 		//Check value against values of the other column members
 		for (int i=0; i<9; i++) {
-			if (field[i][c].isSolved() && field[i][c].getValue()==value)
+			if ((field[i][c].isSolved() || field[i][c].isTempSolved()) && field[i][c].getValue()==value)
 				return false;
 		}
 		
 		//Check value against values of the other zone members
 		for (Cell current : zone[z]) {
-			if (current.isSolved() && current.getValue()==value)
+			if ((current.isSolved() || current.isTempSolved()) && current.getValue()==value)
 				return false;
 		}
 		
