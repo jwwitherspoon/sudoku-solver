@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Sudoku Solver</h1>
+
+<p>
+	Enter your Sudoku grid. Use the number 0 to denote an empty cell.
+	<br>
+	Separate lines with Enter and numbers with Space.
+</p>
+
+<textarea id="puzzle" rows ="11" cols="25">
+5 3 0 0 0 4 0 1 0
+0 8 6 7 0 0 0 5 0
+0 1 0 3 5 0 9 8 0
+8 0 0 0 9 0 1 4 3
+0 0 0 0 0 0 0 0 0
+4 5 1 0 3 0 0 0 7
+0 7 8 0 2 5 0 3 0
+0 4 0 0 0 1 8 6 0
+0 6 0 4 0 0 0 7 1
+</textarea>
+
+<button type="button" onclick="solve()">Solve</button>
+
+<p id="solution"></p>
+
+<script src="solveprep.js"></script>
+<script>
+	var field = createField();
+	var zone = createZone(field);
+	var enumeration = createEnumeration(field);
+
+	function solve() {
+		//Create string rep of puzzle input
+		var text = document.getElementById("puzzle").value;
+		//Split puzzle into rows
+		var puzzle = text.split("\n");
+		//Split each row into columns
+		for (var i=0; i<9; i++) {
+			puzzle[i] = puzzle[i].split(" ");
+		}
+		//Add values to cells
+		for (var i=0; i<9; i++) {
+			for (var j=0; j<9; j++) {
+				field[i][j].value = puzzle[i][j];
+			}
+		}
+
+		//TODO Add solution algorithm
+
+		//Print puzzle
+		document.getElementById("solution").innerHTML = puzzleToText(field);
+	}
+
+	function checkCell() {
+
+	}
+</script>
+
+</body>
+</html>
