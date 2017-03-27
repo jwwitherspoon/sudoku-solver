@@ -24,6 +24,23 @@
 	function solve() {
 		//Create string representation of puzzle input
 		var text = document.getElementById("puzzle").value;
+		
+		//If the word "test" is written in the text area, put a test puzzle in the box
+		//Used for testing purposes only
+		if (document.getElementById("puzzle").value == "test") {
+			document.getElementById("puzzle").value =
+				"5 3 0 0 0 4 0 1 0\n" +
+				"0 8 6 7 0 0 0 5 0\n" +
+				"0 1 0 3 5 0 9 8 0\n" +
+				"8 0 0 0 9 0 1 4 3\n" +
+				"0 0 0 0 0 0 0 0 0\n" +
+				"4 5 1 0 3 0 0 0 7\n" +
+				"0 7 8 0 2 5 0 3 0\n" +
+				"0 4 0 0 0 1 8 6 0\n" +
+				"0 6 0 4 0 0 0 7 1";
+			return 0;
+		}
+		
 		//Split puzzle into rows
 		var puzzle = text.split("\n");
 		//Split each row into columns
