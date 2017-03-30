@@ -18,10 +18,10 @@
 
 <script src="solveprep.js"></script>
 <script>
-	var field = createField();
-	var zone = createZone(field);
-
 	function solve() {
+		var field = createField();
+		var zone = createZone(field);
+
 		//If the word "test" is written in the text area, put a test puzzle in the box
 		//Used for testing purposes only
 		if (document.getElementById("input").value == "test") {
@@ -82,7 +82,7 @@
 			var prev = current.value, next = current.value + 1;
 			//If the current cell is not tempsolved, try adding numbers into the cell until the entry does not violate the Sudoku condition or all values have been tested
 			while (!current.tempSolved && next<=9 && current.value==prev) {
-				if (checkCell(current, next)) {
+				if (checkCell(current, next, field, zone)) {
 					current.value = next;
 					current.tempSolved = true;
 				}
@@ -123,7 +123,7 @@
 		}
 	}
 
-	function checkCell(cell, value) {
+	function checkCell(cell, value, field, zone) {
 		//Create variables to represent the row and column the cell will be checked against
 		var r = cell.row, c = cell.column, z = cell.zone, i = 0;
 
