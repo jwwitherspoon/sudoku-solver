@@ -10,7 +10,7 @@
 	Separate lines with Enter and numbers with Space.
 </p>
 
-<textarea id="puzzle" rows ="11" cols="25"></textarea>
+<textarea id="input" rows ="11" cols="25"></textarea>
 
 <button type="button" onclick="solve()">Solve</button>
 
@@ -22,13 +22,10 @@
 	var zone = createZone(field);
 
 	function solve() {
-		//Create string representation of puzzle input
-		var text = document.getElementById("puzzle").value;
-		
 		//If the word "test" is written in the text area, put a test puzzle in the box
 		//Used for testing purposes only
-		if (document.getElementById("puzzle").value == "test") {
-			document.getElementById("puzzle").value =
+		if (document.getElementById("input").value == "test") {
+			document.getElementById("input").value =
 				"5 3 0 0 0 4 0 1 0\n" +
 				"0 8 6 7 0 0 0 5 0\n" +
 				"0 1 0 3 5 0 9 8 0\n" +
@@ -40,10 +37,23 @@
 				"0 6 0 4 0 0 0 7 1";
 			return 0;
 		}
+
+		//If input matches correct syntax, create string representation of input
+		//Otherwise, print a message asking for the correct syntax
+		var text;
+		var pattern = /(?:(?:\d\s){8}\d\n){8}(?:\d\s){8}\d/;
+		if (pattern.test(document.getElementById("input").value)) {
+			//Create string representation of puzzle input
+			text = pattern.exec(document.getElementById("input").value)[0];
+		}
+		else {
+			document.getElementById("solution").innerHTML = "Please use the correct syntax when entering your puzzle.";
+			return 0;
+		}
 		
 		//Split puzzle into rows
 		var puzzle = text.split("\n");
-		//Split each row into columns
+		//Split rows into values
 		for (var i=0; i<9; i++) {
 			puzzle[i] = puzzle[i].split(" ");
 		}
