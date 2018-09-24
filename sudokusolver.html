@@ -7,20 +7,36 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	</head>
 	<body>
-		<div class="container text-center">
-			<h1>Sudoku Solver</h1>
-
-			<p>
-				Enter your Sudoku grid. Use the number 0 to denote an empty cell.
-				<br>
-				Separate lines with Enter and numbers with Space.
-			</p>
-
-			<textarea id="input" rows ="11" cols="25"></textarea>
-
-			<button type="button" onclick="solve()">Solve</button>
-
-			<p id="solution"></p>
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<h1>Sudoku Solver</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center">
+					<p class="text-center">
+						Enter your Sudoku grid. Use the number 0 to denote an empty cell.
+						<br>
+						Separate lines with Enter and numbers with Space.
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center">
+					<textarea id="input" rows ="11" cols="25"></textarea>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center">
+					<button type="button" class="btn btn-primary" onclick="solve()">Solve</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center">
+					<h3 id="solution"></h3>
+				</div>
+			</div>
 		</div>
 
 		<!--Algorithm scripts-->
