@@ -80,7 +80,16 @@ function solve() {
 
 	//Print puzzle
 	if (puzzleSolved) {
-		document.getElementById("message").innerHTML = puzzleToText(field);
+		for (i=0; i<9; i++) {
+			for (j=0; j<9; j++) {
+				//Put number in cell
+				document.getElementById(i + "-" + j).value = field[i][j].value;
+				//Change new numbers to green
+				if (field[i][j].tempSolved) {
+					document.getElementById(i + "-" + j).style.color = "lightgreen";
+				}
+			}
+		}
 	}
 	else {
 		document.getElementById("message").innerHTML = "This puzzle has no solution.";
