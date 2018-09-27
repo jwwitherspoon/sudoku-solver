@@ -1,8 +1,9 @@
 function solve() {
 	var field = createField();
 	var zone = createZone(field);
+	
 	//Test puzzle functionality
-	if (document.getElementById("0-0").value == 't') {
+	if (document.getElementById("0-0").value == 't' || document.getElementById("0-0").value == 'T') {
 		createPuzzle();
 		return 0;
 	}
