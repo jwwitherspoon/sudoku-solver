@@ -1,0 +1,43 @@
+/*
+Background photo by rawpixel.com from Pexels
+*/
+
+body {
+	background-image: url("background.jpg");
+	background-repeat: no-repeat;
+	background-size: 3000px 2000px;
+}
+
+.container {
+	align-content: center;
+	padding-top: 8%;
+}
+
+.mx-auto {
+	width: 550px;
+	margin: 20px;
+	background-color: #f7f7f7;
+	opacity: 0.8;
+	padding: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+	.mx-auto {
+		width: 280px;
+	}
+}
+
+p {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.btn {
+	margin: 10px;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
