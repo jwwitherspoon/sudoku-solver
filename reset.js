@@ -5,4 +5,5 @@ function reset() {
 			document.getElementById(i + "-" + j).style.color = "black";
 		}
 	}
+	$("#message").html("");
 }
