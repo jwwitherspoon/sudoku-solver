@@ -32,8 +32,26 @@ p {
 	margin-bottom: 20px;
 }
 
+#grid-container {
+	display: flex;
+	justify-content: center;
+}
+
+#grid {
+	display: grid;
+	width: min-content;
+	grid: repeat(9, 1fr) / repeat(9, 1fr);
+	border: 1px solid black;
+}
+
 input {
 	display: table;
+	background-color: initial;
+	border: 1px solid black;
+}
+
+input:focus {
+	outline: none;
 }
 
 .btn {
